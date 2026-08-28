@@ -1,12 +1,10 @@
-<a class="cf-card" href="{{url}}">
-  {{#if coverImage}}<div class="cf-card-cover"><img src="{{coverImage}}" alt="" loading="lazy"></div>{{/if}}
-  <div class="cf-card-body">
-    <h3 class="cf-card-title">{{title}}</h3>
-    {{#if excerpt}}<p class="cf-card-excerpt">{{excerpt}}</p>{{/if}}
-    <div class="cf-card-meta">
-      {{#if publishedAt}}<time datetime="{{format_date publishedAt format="YYYY-MM-DD"}}">{{format_date publishedAt format="MM-DD"}}</time>{{/if}}
-      {{#if category}}<a href="/categories/{{category.slug}}">{{category.name}}</a>{{/if}}
-      {{#if commentCount}}<span>{{commentCount}} 评论</span>{{/if}}
-    </div>
+<article class="cf-card">
+  <h3 class="cf-card-title"><a href="{{url}}">{{title}}</a></h3>
+  {{#if coverImage}}<a href="{{url}}" class="cf-card-cover"><img src="{{coverImage}}" alt="" loading="lazy"></a>{{/if}}
+  {{#if excerpt}}<p class="cf-card-excerpt">{{excerpt}}</p>{{/if}}
+  <div class="cf-card-meta">
+    {{#if publishedAt}}<time datetime="{{format_date publishedAt format="YYYY-MM-DD"}}">{{format_date publishedAt format="MM-DD"}}</time>{{/if}}
+    {{#if category}}<a href="/categories/{{category.slug}}">{{category.name}}</a>{{/if}}
+    {{#if commentCount}}<span>{{commentCount}} 评论</span>{{/if}}
   </div>
-</a>
+</article>
