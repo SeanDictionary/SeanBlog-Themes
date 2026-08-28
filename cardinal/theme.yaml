@@ -1,6 +1,6 @@
 slug: cardinal
 name: Cardinal
-version: 3.1.0
+version: 3.1.1
 author:
   name: SeanBlog Frame
 description: 高自由度可配置主题，Aurora/Lazzaro 风格。侧边栏、列表样式、Hero、字体、色彩模式、圆角、阴影、毛玻璃、代码块等全量自定义。
@@ -160,6 +160,20 @@ settingsSchema:
         - { label: 默认下划线, value: default }
         - { label: 彩色下划线, value: underline }
         - { label: 左侧竖条, value: bar-left }
+    - key: codeBlockTheme
+      label: 代码块配色
+      type: select
+      default: one-dark
+      options:
+        - { label: One Dark, value: one-dark }
+        - { label: GitHub Dark, value: github-dark }
+        - { label: GitHub Light, value: github-light }
+        - { label: Nord, value: nord }
+        - { label: Dracula, value: dracula }
+    - key: showCodeLineNumbers
+      label: 代码块行号
+      type: boolean
+      default: true
   文章详情:
     - key: articleMetaItems
       label: 文章元信息

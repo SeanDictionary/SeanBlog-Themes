@@ -23,7 +23,7 @@
   {{#eq theme.config.showBackToTop true}}<button class="cf-back-to-top" data-cf-back-to-top aria-label="返回顶部"><i class="fa-solid fa-arrow-up"></i></button>{{/eq}}
   {{#eq theme.config.showCommentJumpButton true}}{{#eq page "post"}}{{#ne commentsMode "disabled"}}<button class="cf-comment-jump" data-cf-comment-jump aria-label="跳转评论"><i class="fa-solid fa-comment"></i></button>{{/ne}}{{/eq}}{{/eq}}
   <script src="{{asset "assets/js/main.js"}}" defer></script>
-  {{{platform_enhance}}}
+{{{platform_enhance}}}
   <script>(function(){var m="{{theme.config.colorMode}}";if(document.cookie.indexOf("sb-theme=")>=0){var c=(document.cookie.match(/sb-theme=(dark|light)/)||[])[1];if(c)document.documentElement.setAttribute("data-theme",c);}else if(m==="auto"){try{document.documentElement.setAttribute("data-theme",matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}catch(e){}}})();</script>
 </body>
 </html>
