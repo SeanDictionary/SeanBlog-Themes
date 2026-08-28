@@ -415,3 +415,11 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
 [data-list="cards"] .cf-card-excerpt { display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .cf-tag { display: inline-block; padding: 0.1rem 0.5rem; background: var(--color-bg-tertiary); border-radius: 9999px; font-size: 0.7rem; color: var(--color-text-secondary); text-decoration: none; margin-right: 0.25rem; }
 @media (max-width: 640px) { [data-list="list"] .cf-card-cover { width: 72px; } }
+
+/* === 文章元信息：·分隔 + 标签独立行 === */
+.cf-post-meta { display: flex; flex-wrap: wrap; align-items: center; font-size: 0.78rem; color: var(--color-text-tertiary); margin-bottom: 0.5rem; }
+.cf-meta-item { display: inline-flex; align-items: center; }
+.cf-meta-item:not(:first-child)::before { content: "·"; margin: 0 0.5rem; opacity: 0.5; }
+.cf-meta-item a { text-decoration: none; color: inherit; }
+.cf-meta-item a:hover { color: var(--color-text-secondary); }
+.cf-post-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2rem; }

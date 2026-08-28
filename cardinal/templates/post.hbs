@@ -4,15 +4,20 @@
     <h1 class="cf-post-title">{{post.title}}</h1>
     <div class="cf-post-meta">
       {{#each theme.config.articleMetaItems}}
-        {{#eq this "publishedAt"}}{{#if ../post.publishedAt}}<time datetime="{{format_date ../post.publishedAt format="YYYY-MM-DD"}}">{{format_date ../post.publishedAt format="YYYY-MM-DD"}}</time>{{/if}}{{/eq}}
-        {{#eq this "updatedAt"}}{{#if ../post.updatedAt}}<span>更新于 {{format_date ../post.updatedAt format="YYYY-MM-DD"}}</span>{{/if}}{{/eq}}
-        {{#eq this "viewCount"}}{{#if ../post.viewCount}}<span>{{../post.viewCount}} 浏览</span>{{/if}}{{/eq}}
-        {{#eq this "commentCount"}}{{#if ../comments.length}}<span>{{../comments.length}} 评论</span>{{/if}}{{/eq}}
-        {{#eq this "category"}}{{#if ../post.category}}<a href="/categories/{{../post.category.slug}}">{{../post.category.name}}</a>{{/if}}{{/eq}}
-        {{#eq this "tags"}}{{#each ../post.tags}}<a class="cf-tag" href="/tags/{{slug}}">{{name}}</a>{{/each}}{{/eq}}
+        {{#eq this "publishedAt"}}{{#if ../post.publishedAt}}<span class="cf-meta-item"><time datetime="{{format_date ../post.publishedAt format="YYYY-MM-DD"}}">{{format_date ../post.publishedAt format="YYYY-MM-DD"}}</time></span>{{/if}}{{/eq}}
+        {{#eq this "updatedAt"}}{{#if ../post.updatedAt}}<span class="cf-meta-item">更新于 {{format_date ../post.updatedAt format="YYYY-MM-DD"}}</span>{{/if}}{{/eq}}
+        {{#eq this "viewCount"}}{{#if ../post.viewCount}}<span class="cf-meta-item">{{../post.viewCount}} 浏览</span>{{/if}}{{/eq}}
+        {{#eq this "commentCount"}}{{#if ../comments.length}}<span class="cf-meta-item">{{../comments.length}} 评论</span>{{/if}}{{/eq}}
+        {{#eq this "category"}}{{#if ../post.category}}<a class="cf-meta-item" href="/categories/{{../post.category.slug}}">{{../post.category.name}}</a>{{/if}}{{/eq}}
+        {{#eq this "tags"}}{{!-- tags rendered separately below --}}{{/eq}}
       {{/each}}
-      {{#eq theme.config.showReadingTime true}}<span>{{post.readingMinutes}} 分钟 · {{post.wordCount}} 字</span>{{/eq}}
+      {{#eq theme.config.showReadingTime true}}<span class="cf-meta-item">{{post.readingMinutes}} 分钟 · {{post.wordCount}} 字</span>{{/eq}}
     </div>
+    {{#if post.tags.length}}
+    <div class="cf-post-tags">
+      {{#each post.tags}}<a class="cf-tag" href="/tags/{{slug}}">{{name}}</a>{{/each}}
+    </div>
+    {{/if}}
     {{#if post.coverImage}}<img class="cf-post-cover" src="{{post.coverImage}}" alt="">{{/if}}
   </header>
 
