@@ -423,3 +423,11 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
 .cf-meta-item a { text-decoration: none; color: inherit; }
 .cf-meta-item a:hover { color: var(--color-text-secondary); }
 .cf-post-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2rem; }
+
+/* === 列表头 + 排序 === */
+.cf-list-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.25rem; }
+.cf-list-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-tertiary); margin: 0; font-family: var(--cf-heading-font); }
+.cf-sort { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+.cf-sort a { font-size: 0.72rem; color: var(--color-text-tertiary); text-decoration: none; padding: 0.3rem 0.6rem; border-radius: 9999px; transition: all .15s; }
+.cf-sort a:hover { color: var(--color-text); background: var(--color-bg-secondary); }
+.cf-sort a[aria-current="true"] { color: var(--color-accent); background: var(--color-accent-subtle); }
