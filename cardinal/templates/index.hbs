@@ -1,29 +1,30 @@
-{{#if theme.config.show_hero}}
-<section class="cf-hero">
-  <h1 class="cf-hero-title">{{site.title}}</h1>
-  {{#if site.description}}<p class="cf-hero-desc">{{site.description}}</p>{{/if}}
+{{> hero}}
+
+{{#eq theme.config.showFeaturedSection true}}
+{{#if pinned.length}}
+<section class="cf-featured">
+  <p class="cf-list-title">精选</p>
+  <div class="cf-posts">
+    {{#each pinned}}{{> post-card}}{{/each}}
+  </div>
 </section>
 {{/if}}
+{{/eq}}
 
-<div class="cf-list-wrap">
+<section class="cf-list">
   <div class="cf-list-head">
-    <h2 class="cf-list-title">{{#eq pagination.page 1}}文章{{else}}第 {{pagination.page}} 页{{/eq}}</h2>
+    <p class="cf-list-title">{{#eq pagination.page 1}}最新文章{{else}}第 {{pagination.page}} 页{{/eq}}</p>
     <nav class="cf-sort">
-      {{#each sortOptions}}<a href="{{href}}" {{#eq value ../sort}}class="cf-sort-active"{{/eq}}>{{label}}</a>{{/each}}
+      {{#each sortOptions}}<a href="{{href}}" {{#eq value ../sort}}aria-current="true"{{/eq}}>{{label}}</a>{{/each}}
     </nav>
   </div>
   {{#if posts.length}}
-    {{#eq theme.config.list_style "cards"}}
-      <div class="cf-grid cf-grid-{{theme.config.posts_per_row}}">
-        {{#each posts}}{{> post-card}}{{/each}}
-      </div>
-    {{else}}
-      <div class="cf-list">
-        {{#each posts}}{{> post-card}}{{/each}}
-      </div>
-    {{/eq}}
+  <div class="cf-posts">
+    {{#each posts}}{{> post-card}}{{/each}}
+  </div>
   {{else}}
-    <p class="cf-empty">这里还没有文章。</p>
+  <p class="cf-empty">这里还没有文章。</p>
   {{/if}}
-  {{> pagination}}
-</div>
+</section>
+
+{{> pagination}}

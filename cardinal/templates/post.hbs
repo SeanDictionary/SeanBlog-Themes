@@ -1,49 +1,69 @@
 <article class="cf-post">
   <header class="cf-post-head">
-    <p class="cf-widget-title">文章</p>
+    <p class="cf-post-kicker">文章</p>
     <h1 class="cf-post-title">{{post.title}}</h1>
     <div class="cf-post-meta">
-      {{#if post.publishedAt}}<time>{{format_date post.publishedAt format="YYYY-MM-DD"}}</time>{{/if}}
-      {{#if post.category}}<span>{{post.category.name}}</span>{{/if}}
-      {{#if post.viewCount}}<span>{{post.viewCount}} 浏览</span>{{/if}}
-      <span>{{post.readingMinutes}} 分钟 · {{post.wordCount}} 字</span>
+      {{#each theme.config.articleMetaItems}}
+        {{#eq this "publishedAt"}}{{#if ../post.publishedAt}}<time datetime="{{format_date ../post.publishedAt format="YYYY-MM-DD"}}">{{format_date ../post.publishedAt format="YYYY-MM-DD"}}</time>{{/if}}{{/eq}}
+        {{#eq this "updatedAt"}}{{#if ../post.updatedAt}}<span>更新于 {{format_date ../post.updatedAt format="YYYY-MM-DD"}}</span>{{/if}}{{/eq}}
+        {{#eq this "viewCount"}}{{#if ../post.viewCount}}<span>{{../post.viewCount}} 浏览</span>{{/if}}{{/eq}}
+        {{#eq this "commentCount"}}{{#if ../comments.length}}<span>{{../comments.length}} 评论</span>{{/if}}{{/eq}}
+        {{#eq this "category"}}{{#if ../post.category}}<a href="/categories/{{../post.category.slug}}">{{../post.category.name}}</a>{{/if}}{{/eq}}
+        {{#eq this "tags"}}{{#each ../post.tags}}<a class="cf-tag" href="/tags/{{slug}}">{{name}}</a>{{/each}}{{/eq}}
+      {{/each}}
+      {{#eq theme.config.showReadingTime true}}<span>{{post.readingMinutes}} 分钟 · {{post.wordCount}} 字</span>{{/eq}}
     </div>
     {{#if post.coverImage}}<img class="cf-post-cover" src="{{post.coverImage}}" alt="">{{/if}}
   </header>
 
   <div class="cf-post-content article-content">{{{content}}}</div>
 
-  {{#if toc.length}}
-  <nav class="cf-toc" data-sb-toc aria-label="目录">
-    <p class="cf-widget-title">目录</p>
-    {{#each toc}}<a href="#{{id}}" style="display:block;margin-left:{{level}}rem;font-size:0.85rem;color:var(--color-text-secondary)">{{text}}</a>{{/each}}
-  </nav>
-  {{/if}}
-
+  {{#eq theme.config.showArticleNav true}}
   <nav class="cf-post-nav">
-    {{#if navigation.previous}}<a href="/articles/{{navigation.previous.slug}}">← {{navigation.previous.title}}</a>{{/if}}
-    {{#if navigation.next}}<a href="/articles/{{navigation.next.slug}}">{{navigation.next.title}} →</a>{{/if}}
+    {{#if navigation.previous}}<a href="/articles/{{navigation.previous.slug}}" rel="prev">← {{navigation.previous.title}}</a>{{/if}}
+    {{#if navigation.next}}<a href="/articles/{{navigation.next.slug}}" rel="next">{{navigation.next.title}} →</a>{{/if}}
   </nav>
+  {{/eq}}
 
-  <section class="cf-comments">
+  <section id="sb-comments" class="cf-comments">
     <p class="cf-widget-title">{{comments.length}} 条评论</p>
+
     {{#each comments}}
     <article class="cf-comment" data-id="{{id}}">
-      <header>{{author}} · {{format_date createdAt format="YYYY-MM-DD HH:mm"}}</header>
-      <div>{{content}}</div>
+      <div class="cf-comment-head">
+        {{#if link}}<a class="cf-comment-author" href="{{link}}" target="_blank" rel="nofollow">{{author}}</a>{{else}}<span class="cf-comment-author">{{author}}</span>{{/if}}
+        <span class="cf-comment-time">· {{format_date createdAt format="YYYY-MM-DD HH:mm"}}</span>
+      </div>
+      <div class="cf-comment-body">{{#if replyToAuthor}}<span class="cf-reply-at">@{{replyToAuthor}} </span>{{/if}}{{content}}</div>
+      <button type="button" class="cf-comment-reply-btn" data-sb-reply-to="{{id}}" data-sb-reply-author="{{author}}">回复</button>
       {{#if replies.length}}
       <div class="cf-comment-replies">
-        {{#each replies}}<div class="cf-comment"><header>{{author}}</header><div>{{content}}</div></div>{{/each}}
+        {{#each replies}}
+        <article class="cf-comment" data-id="{{id}}">
+          <div class="cf-comment-head"><span class="cf-comment-author">{{author}}</span><span class="cf-comment-time">· {{format_date createdAt format="MM-DD HH:mm"}}</span></div>
+          <div class="cf-comment-body">{{#if replyToAuthor}}<span class="cf-reply-at">@{{replyToAuthor}} </span>{{/if}}{{content}}</div>
+          <button type="button" class="cf-comment-reply-btn" data-sb-reply-to="{{id}}" data-sb-reply-author="{{author}}">回复</button>
+        </article>
+        {{/each}}
       </div>
       {{/if}}
     </article>
     {{/each}}
+
     {{#ne commentsMode "disabled"}}
-    <form data-sb-comment-form data-article-id="{{post.id}}">
-      <input name="content" placeholder="写下你的评论…" required>
-      <input name="guestName" placeholder="昵称（可选）">
-      <button type="submit">发表评论</button>
-      <p data-sb-comment-status></p>
+    <form class="cf-comment-form" data-sb-comment-form data-sb-comment-target="#sb-comments" data-article-id="{{post.id}}">
+      <div class="cf-reply-banner" data-sb-reply-banner hidden><span data-sb-reply-text></span> <button type="button" class="cf-reply-cancel" data-sb-reply-cancel>取消</button></div>
+      <div class="cf-form-row">
+        <label class="cf-field">昵称<input name="guestName" type="text" placeholder="你的昵称" autocomplete="name"></label>
+        <label class="cf-field">邮箱<input name="guestEmail" type="email" placeholder="email@example.com" autocomplete="email"></label>
+      </div>
+      <label class="cf-field" style="margin-bottom:0.75rem">网站<input name="guestLink" type="url" placeholder="https://（可选）" autocomplete="url"></label>
+      <label class="cf-field">评论<textarea name="content" placeholder="写下你的评论…" required></textarea></label>
+      <input type="hidden" name="parentId" value="">
+      <div class="cf-form-actions">
+        <button type="submit" class="cf-btn">发表评论</button>
+        <p class="cf-comment-status" data-sb-comment-status></p>
+      </div>
     </form>
     {{/ne}}
   </section>

@@ -1,9 +1,9 @@
 {{#if pagination.pageCount}}
 <nav class="cf-pagination" aria-label="分页">
-  {{#if pagination.prevUrl}}<a href="{{pagination.prevUrl}}" rel="prev">←</a>{{/if}}
+  {{#if pagination.prevUrl}}<a href="{{pagination.prevUrl}}" rel="prev" aria-label="上一页">←</a>{{/if}}
   {{#each pagination.pages}}
     {{#if active}}<span class="cf-page-active">{{page}}</span>{{else}}<a href="{{url}}">{{page}}</a>{{/if}}
   {{/each}}
-  {{#if pagination.nextUrl}}<a href="{{pagination.nextUrl}}" rel="next">→</a>{{/if}}
+  {{#if pagination.nextUrl}}<a href="{{pagination.nextUrl}}" rel="next" aria-label="下一页">→</a>{{/if}}
 </nav>
 {{/if}}

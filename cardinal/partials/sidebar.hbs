@@ -1,6 +1,52 @@
 <aside class="cf-sidebar">
-  <div class="cf-widget">
-    <h3 class="cf-widget-title">关于</h3>
-    <p class="cf-site-desc">{{site.description}}</p>
-  </div>
+  {{#each theme.config.sidebarContent}}
+    {{#eq this "profile"}}
+    <div class="cf-widget">
+      <p class="cf-profile-name">{{../site.title}}</p>
+      {{#if ../site.description}}<p class="cf-profile-desc">{{../site.description}}</p>{{/if}}
+    </div>
+    {{/eq}}
+    {{#eq this "recent"}}
+    {{#if ../sidebarData.recentArticles.length}}
+    <div class="cf-widget">
+      <p class="cf-widget-title">最近文章</p>
+      <ul class="cf-recent-list">
+        {{#each ../sidebarData.recentArticles}}
+        <li><a href="/articles/{{slug}}">{{title}}</a>{{#if publishedAt}}<span class="cf-recent-time">{{format_date publishedAt format="MM-DD"}}</span>{{/if}}</li>
+        {{/each}}
+      </ul>
+    </div>
+    {{/if}}
+    {{/eq}}
+    {{#eq this "tags"}}
+    {{#if ../sidebarData.tags.length}}
+    <div class="cf-widget">
+      <p class="cf-widget-title">标签</p>
+      <div class="cf-tag-cloud">
+        {{#each ../sidebarData.tags}}<a href="/tags/{{slug}}">{{name}}</a>{{/each}}
+      </div>
+    </div>
+    {{/if}}
+    {{/eq}}
+    {{#eq this "categories"}}
+    {{#if ../sidebarData.categories.length}}
+    <div class="cf-widget">
+      <p class="cf-widget-title">分类</p>
+      <ul class="cf-cat-list">
+        {{#each ../sidebarData.categories}}<li><a href="/categories/{{slug}}">{{name}}</a><span class="cf-cat-count">{{count}}</span></li>{{/each}}
+      </ul>
+    </div>
+    {{/if}}
+    {{/eq}}
+    {{#eq this "toc"}}
+    {{#if ../toc.length}}
+    <div class="cf-widget">
+      <p class="cf-widget-title">目录</p>
+      <nav data-sb-toc>
+        {{#each ../toc}}<a href="#{{id}}" style="padding-left:{{level}}rem">{{text}}</a>{{/each}}
+      </nav>
+    </div>
+    {{/if}}
+    {{/eq}}
+  {{/each}}
 </aside>

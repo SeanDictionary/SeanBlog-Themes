@@ -1,5 +1,8 @@
-<header class="cf-archive-head"><p class="cf-widget-title">标签</p><h1 class="cf-archive-title">标签</h1></header>
+<header class="cf-archive-head">
+  <p class="cf-archive-kicker">标签</p>
+  <h1 class="cf-archive-title">标签</h1>
+</header>
 <div class="cf-tag-cloud">
-  {{#each tags}}<a class="cf-tag" href="/tags/{{slug}}">{{name}}</a>{{/each}}
+  {{#each tags}}<a href="/tags/{{slug}}">{{name}}</a>{{/each}}
 </div>
 {{> pagination}}

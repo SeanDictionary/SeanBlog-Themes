@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{site.locale}}" data-theme="{{theme.config.color_mode}}" class="cf-font-{{theme.config.font_family}} cf-radius-{{theme.config.border_radius}}">
+<html lang="{{site.locale}}" data-theme="{{#eq theme.config.colorMode "light"}}light{{else}}dark{{/eq}}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,23 +8,22 @@
   <link rel="stylesheet" href="{{asset "assets/theme.css"}}">
   {{{theme_css}}}
   {{{callout_css}}}
-  <style>
-    :root {
-      {{#eq theme.config.font_family "monospace"}}--cf-font: ui-monospace, Menlo, monospace;{{/eq}}
-      {{#eq theme.config.font_family "sans"}}--cf-font: system-ui, sans-serif;{{/eq}}
-      {{#eq theme.config.font_family "serif"}}--cf-font: Georgia, serif;{{/eq}}
-    }
-    body { font-family: var(--cf-font, ui-monospace, monospace); }
-  </style>
 </head>
-<body class="cf-body cf-layout-{{theme.config.sidebar_position}}">
-  {{> header}}
-  <div class="cf-wrap">
-    {{#eq theme.config.sidebar_position "left"}}{{> sidebar}}{{/eq}}
-    <main class="cf-main">{{{body}}}</main>
-    {{#eq theme.config.sidebar_position "right"}}{{> sidebar}}{{/eq}}
+<body class="cf-body cf-page-{{page}}" data-font="{{theme.config.fontFamily}}" data-heading="{{theme.config.headingFontFamily}}" data-radius="{{theme.config.borderRadius}}" data-shadow="{{theme.config.shadowStyle}}" data-width="{{theme.config.contentWidth}}" data-list="{{theme.config.articleListStyle}}" data-sep="{{theme.config.listSeparator}}" data-hero="{{theme.config.heroStyle}}" data-sidebar="{{theme.config.sidebarPosition}}" data-sticky="{{theme.config.sidebarSticky}}" data-header="{{theme.config.headerBehavior}}" data-blur="{{theme.config.headerBlur}}">
+  {{#eq theme.config.showTopBar true}}{{> header}}{{/eq}}
+  <div class="cf-layout">
+    {{#eq theme.config.sidebarPosition "left"}}{{> sidebar}}{{/eq}}
+    <main class="cf-main">
+      {{{body}}}
+    </main>
+    {{#eq theme.config.sidebarPosition "right"}}{{> sidebar}}{{/eq}}
   </div>
   {{> footer}}
+  {{> search-dialog}}
+  {{#eq theme.config.showBackToTop true}}<button class="cf-back-to-top" data-cf-back-to-top aria-label="返回顶部"><i class="fa-solid fa-arrow-up"></i></button>{{/eq}}
+  {{#eq theme.config.showCommentJumpButton true}}{{#eq page "post"}}{{#ne commentsMode "disabled"}}<button class="cf-comment-jump" data-cf-comment-jump aria-label="跳转评论"><i class="fa-solid fa-comment"></i></button>{{/ne}}{{/eq}}{{/eq}}
+  <script src="{{asset "assets/js/main.js"}}" defer></script>
   {{{platform_enhance}}}
+  <script>(function(){var m="{{theme.config.colorMode}}";if(document.cookie.indexOf("sb-theme=")>=0){var c=(document.cookie.match(/sb-theme=(dark|light)/)||[])[1];if(c)document.documentElement.setAttribute("data-theme",c);}else if(m==="auto"){try{document.documentElement.setAttribute("data-theme",matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}catch(e){}}})();</script>
 </body>
 </html>
