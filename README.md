@@ -1,51 +1,39 @@
-# SeanBlog-Themes
+# SeanBlog Themes
 
-SeanBlog Frame 第三方主题开发仓库。每个子目录是一个可独立打包上传的主题包。
+SeanBlog Frame 第三方主题仓库。存放社区/自定义主题包。
 
-## 主题包结构
+## 结构
 
 ```
-cardinal/
-  theme.yaml            # 清单（slug/name/version/engine/engineVersion/settingsSchema）
-  templates/            # Handlebars 模板（.hbs）
-    default.hbs         # 整页布局（<html><head><body>{{{body}}}</body>）
-    index.hbs           # 首页
-    post.hbs            # 文章详情
-    taxonomy.hbs        # 分类/标签归档
-    categories.hbs / tags.hbs
-    search.hbs
-  partials/             # 可复用片段（header/footer/post-card/pagination/...）
-  assets/               # CSS/JS/图片/字体
-    theme.css
+seanblog-themes/
+  cardinal/          # 每个子目录是一个可独立打包的主题包
+  another-theme/    # 将来的主题…
+  README.md         # 本文件（仅描述仓库用途）
 ```
+
+每个主题包子目录下有自己的 `README.md` 描述该主题的功能、设置项和自定义说明。
+
+## 用途
+
+- 开发、存放、分发第三方主题包。
+- 主题包可打包为 `.zip` 上传到 SeanBlog-Frame 后台安装启用。
 
 ## 开发流程
 
-1. 在本仓库新建子目录（如 `my-theme/`），按上面结构编写。
-2. 在 SeanBlog-Frame 本地，把主题目录链接/复制到 `themes/{slug}/`：
+1. 在本仓库新建子目录（如 `my-theme/`），按 [SeanBlog-Frame 主题框架文档](../SeanBlog-Frame/docs/theme-framework.md) 的结构编写。
+2. 本地开发时，将主题目录联接到 SeanBlog-Frame 的 `themes/` 目录：
    ```bash
-   # Windows 联接（无需管理员）
+   # Windows（目录联接，无需管理员）
    mklink /J D:\Github\SeanBlog-Frame\themes\my-theme D:\Github\SeanBlog-Themes\my-theme
    ```
-3. 启动 `npm run dev`，后台 `/admin/themes` 启用该主题（或 DB 写 `activeTheme`）。
-4. 调试模板/样式/CSS 变量，HMR 之外的主题文件改动会被引擎 dev 模式自动重读。
+3. 启动 `npm run dev`，后台 `/admin/themes` 启用该主题。
+4. 打包上传：
+   ```bash
+   cd my-theme && zip -r ../my-theme.zip .
+   ```
+   后台 `/admin/themes` 上传 zip → 安装 → 切换。
 
-## 打包上传
+## 提交规范
 
-把主题目录的内容（`theme.yaml` 在 zip 根）打包成 zip：
-
-```bash
-cd cardinal && zip -r ../cardinal.zip . -x "*.git*"
-```
-
-后台 `/admin/themes` 上传 zip 即可安装启用，生产环境无需重新部署。
-
-## 模板语法与契约
-
-见 `SeanBlog-Frame/docs/theme-framework.md`。
-
-## 内置主题
-
-- `cardinal` — 高自由度可配置主题（侧栏/列表样式/Hero/字体/圆角/色彩模式等），作为高自定义参考实现。
-
-SeanBlog-Frame 仓库自带 `seanblog-default` 主题（作为 fallback 兜底，不在此仓库）。
+- 主题包文件提交到各自子目录。
+- 仓库根 README 仅描述仓库用途，不放任何主题包的具体内容。
