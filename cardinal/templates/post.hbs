@@ -1,0 +1,50 @@
+<article class="cf-post">
+  <header class="cf-post-head">
+    <p class="cf-widget-title">文章</p>
+    <h1 class="cf-post-title">{{post.title}}</h1>
+    <div class="cf-post-meta">
+      {{#if post.publishedAt}}<time>{{format_date post.publishedAt format="YYYY-MM-DD"}}</time>{{/if}}
+      {{#if post.category}}<span>{{post.category.name}}</span>{{/if}}
+      {{#if post.viewCount}}<span>{{post.viewCount}} 浏览</span>{{/if}}
+      <span>{{post.readingMinutes}} 分钟 · {{post.wordCount}} 字</span>
+    </div>
+    {{#if post.coverImage}}<img class="cf-post-cover" src="{{post.coverImage}}" alt="">{{/if}}
+  </header>
+
+  <div class="cf-post-content article-content">{{{content}}}</div>
+
+  {{#if toc.length}}
+  <nav class="cf-toc" data-sb-toc aria-label="目录">
+    <p class="cf-widget-title">目录</p>
+    {{#each toc}}<a href="#{{id}}" style="display:block;margin-left:{{level}}rem;font-size:0.85rem;color:var(--color-text-secondary)">{{text}}</a>{{/each}}
+  </nav>
+  {{/if}}
+
+  <nav class="cf-post-nav">
+    {{#if navigation.previous}}<a href="/articles/{{navigation.previous.slug}}">← {{navigation.previous.title}}</a>{{/if}}
+    {{#if navigation.next}}<a href="/articles/{{navigation.next.slug}}">{{navigation.next.title}} →</a>{{/if}}
+  </nav>
+
+  <section class="cf-comments">
+    <p class="cf-widget-title">{{comments.length}} 条评论</p>
+    {{#each comments}}
+    <article class="cf-comment" data-id="{{id}}">
+      <header>{{author}} · {{format_date createdAt format="YYYY-MM-DD HH:mm"}}</header>
+      <div>{{content}}</div>
+      {{#if replies.length}}
+      <div class="cf-comment-replies">
+        {{#each replies}}<div class="cf-comment"><header>{{author}}</header><div>{{content}}</div></div>{{/each}}
+      </div>
+      {{/if}}
+    </article>
+    {{/each}}
+    {{#ne commentsMode "disabled"}}
+    <form data-sb-comment-form data-article-id="{{post.id}}">
+      <input name="content" placeholder="写下你的评论…" required>
+      <input name="guestName" placeholder="昵称（可选）">
+      <button type="submit">发表评论</button>
+      <p data-sb-comment-status></p>
+    </form>
+    {{/ne}}
+  </section>
+</article>

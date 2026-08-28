@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{site.locale}}" data-theme="{{theme.config.color_mode}}" class="cf-font-{{theme.config.font_family}} cf-radius-{{theme.config.border_radius}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{{font_awesome}}}
+  {{{seo_head}}}
+  <link rel="stylesheet" href="{{asset "assets/theme.css"}}">
+  {{{theme_css}}}
+  {{{callout_css}}}
+  <style>
+    :root {
+      {{#eq theme.config.font_family "monospace"}}--cf-font: ui-monospace, Menlo, monospace;{{/eq}}
+      {{#eq theme.config.font_family "sans"}}--cf-font: system-ui, sans-serif;{{/eq}}
+      {{#eq theme.config.font_family "serif"}}--cf-font: Georgia, serif;{{/eq}}
+    }
+    body { font-family: var(--cf-font, ui-monospace, monospace); }
+  </style>
+</head>
+<body class="cf-body cf-layout-{{theme.config.sidebar_position}}">
+  {{> header}}
+  <div class="cf-wrap">
+    {{#eq theme.config.sidebar_position "left"}}{{> sidebar}}{{/eq}}
+    <main class="cf-main">{{{body}}}</main>
+    {{#eq theme.config.sidebar_position "right"}}{{> sidebar}}{{/eq}}
+  </div>
+  {{> footer}}
+  {{{platform_enhance}}}
+</body>
+</html>

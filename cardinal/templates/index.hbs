@@ -1,0 +1,29 @@
+{{#if theme.config.show_hero}}
+<section class="cf-hero">
+  <h1 class="cf-hero-title">{{site.title}}</h1>
+  {{#if site.description}}<p class="cf-hero-desc">{{site.description}}</p>{{/if}}
+</section>
+{{/if}}
+
+<div class="cf-list-wrap">
+  <div class="cf-list-head">
+    <h2 class="cf-list-title">{{#eq pagination.page 1}}文章{{else}}第 {{pagination.page}} 页{{/eq}}</h2>
+    <nav class="cf-sort">
+      {{#each sortOptions}}<a href="{{href}}" {{#eq value ../sort}}class="cf-sort-active"{{/eq}}>{{label}}</a>{{/each}}
+    </nav>
+  </div>
+  {{#if posts.length}}
+    {{#eq theme.config.list_style "cards"}}
+      <div class="cf-grid cf-grid-{{theme.config.posts_per_row}}">
+        {{#each posts}}{{> post-card}}{{/each}}
+      </div>
+    {{else}}
+      <div class="cf-list">
+        {{#each posts}}{{> post-card}}{{/each}}
+      </div>
+    {{/eq}}
+  {{else}}
+    <p class="cf-empty">这里还没有文章。</p>
+  {{/if}}
+  {{> pagination}}
+</div>

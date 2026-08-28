@@ -1,0 +1,13 @@
+<header class="cf-archive-head">
+  <p class="cf-widget-title">{{#eq taxonomy.type "category"}}分类{{else}}标签{{/eq}}</p>
+  <h1 class="cf-archive-title">{{taxonomy.name}}</h1>
+  {{#if taxonomy.description}}<p class="cf-archive-desc">{{taxonomy.description}}</p>{{/if}}
+</header>
+{{#if posts.length}}
+  {{#eq theme.config.list_style "cards"}}<div class="cf-grid cf-grid-{{theme.config.posts_per_row}}">{{/eq}}
+  {{#each posts}}{{> post-card}}{{/each}}
+  {{#eq theme.config.list_style "cards"}}</div>{{/eq}}
+{{else}}
+  <p class="cf-empty">暂无文章。</p>
+{{/if}}
+{{> pagination}}

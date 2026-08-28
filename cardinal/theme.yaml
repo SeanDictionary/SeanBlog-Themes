@@ -1,0 +1,74 @@
+slug: cardinal
+name: Cardinal
+version: 2.0.3
+author:
+  name: SeanBlog Frame
+description: 高自由度可配置主题，支持侧边栏、列表样式、Hero、字体、色彩模式等设置。
+engine: seanblog-theme
+engineVersion: 2
+base: seanblog-default
+assets:
+  css: assets/theme.css
+settingsSchema:
+  布局:
+    - key: sidebar_position
+      label: 侧边栏位置
+      type: select
+      default: right
+      options:
+        - { label: 无, value: none }
+        - { label: 左侧, value: left }
+        - { label: 右侧, value: right }
+    - key: list_style
+      label: 文章列表样式
+      type: select
+      default: list
+      options:
+        - { label: 文字列表, value: list }
+        - { label: 卡片网格, value: cards }
+    - key: show_hero
+      label: 首页 Hero 区
+      type: boolean
+      default: true
+    - key: posts_per_row
+      label: 卡片每行数
+      type: select
+      default: "2"
+      options:
+        - { label: "2", value: "2" }
+        - { label: "3", value: "3" }
+  视觉:
+    - key: color_mode
+      label: 色彩模式
+      type: select
+      default: dark
+      options:
+        - { label: 深色, value: dark }
+        - { label: 浅色, value: light }
+        - { label: 跟随系统, value: auto }
+    - key: show_theme_toggle
+      label: 前台深浅色切换按钮
+      type: boolean
+      default: true
+    - key: accent_color
+      label: 强调色
+      type: color
+      default: "#cf829e"
+      cssVariable: --color-accent
+    - key: font_family
+      label: 正文字体
+      type: select
+      default: monospace
+      options:
+        - { label: 等宽, value: monospace }
+        - { label: 无衬线, value: sans }
+        - { label: 衬线, value: serif }
+    - key: border_radius
+      label: 圆角
+      type: select
+      default: small
+      options:
+        - { label: 无, value: none }
+        - { label: 小, value: small }
+        - { label: 中, value: medium }
+        - { label: 大, value: large }
