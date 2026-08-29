@@ -1,6 +1,6 @@
 slug: cardinal
 name: Cardinal
-version: 3.2.3
+version: 3.2.4
 author:
   name: SeanBlog Frame
 description: 高自由度可配置主题，Aurora/Lazzaro 风格。侧边栏、列表样式、Hero、字体、色彩模式、圆角、阴影、毛玻璃、代码块等全量自定义。
@@ -21,6 +21,7 @@ settingsSchema:
       label: 顶部栏行为
       type: select
       default: fixed-always
+      if: "showTopBar === true"
       options:
         - { label: 始终固定, value: fixed-always }
         - { label: 滚动隐藏, value: collapse-on-scroll }
@@ -37,6 +38,7 @@ settingsSchema:
       label: 侧边栏固定
       type: select
       default: sticky
+      if: "sidebarPosition !== 'none'"
       options:
         - { label: 不固定, value: static }
         - { label: 滚动吸顶, value: sticky }
@@ -45,6 +47,7 @@ settingsSchema:
       label: 侧边栏内容
       type: multiselect
       default: ["profile", "recent", "tags"]
+      if: "sidebarPosition !== 'none'"
       options:
         - { label: 个人简介, value: profile }
         - { label: 最近文章, value: recent }
@@ -70,6 +73,7 @@ settingsSchema:
       label: 列表分隔方式
       type: select
       default: border
+      if: "articleListStyle === 'list'"
       options:
         - { label: 底线分隔, value: border }
         - { label: 间距分隔, value: gap }
@@ -82,11 +86,11 @@ settingsSchema:
       label: Hero 区样式
       type: select
       default: minimal
+      if: "showHeroSection === true"
       options:
         - { label: 居中极简, value: minimal }
         - { label: 渐变横幅, value: banner }
         - { label: 全屏封面, value: fullscreen }
-        - { label: 隐藏, value: hidden }
     - key: showFeaturedSection
       label: 精选文章区
       type: boolean
@@ -109,6 +113,7 @@ settingsSchema:
       label: 前台色彩切换按钮
       type: boolean
       default: true
+      if: "showTopBar === true"
     - key: fontFamily
       label: 正文字体
       type: select
@@ -152,6 +157,7 @@ settingsSchema:
       label: 顶栏毛玻璃
       type: boolean
       default: true
+      if: "showTopBar === true"
     - key: articleHeadingStyle
       label: 文章标题装饰
       type: select
