@@ -1,9 +1,9 @@
 {{> hero}}
 
-{{#eq theme.config.showFeaturedSection true}}
+{{#eq theme.config.showPinned true}}
 {{#if pinned.length}}
 <section class="cf-featured">
-  <p class="cf-list-title">精选</p>
+  <p class="cf-list-title">置顶</p>
   <div class="cf-posts">
     {{#each pinned}}{{> post-card}}{{/each}}
   </div>
@@ -20,7 +20,11 @@
   </div>
   {{#if posts.length}}
   <div class="cf-posts">
-    {{#each posts}}{{> post-card}}{{/each}}
+    {{#eq theme.config.showPinned true}}
+      {{#each posts}}{{#unless isPinned}}{{> post-card}}{{/unless}}{{/each}}
+    {{else}}
+      {{#each posts}}{{> post-card}}{{/each}}
+    {{/eq}}
   </div>
   {{else}}
   <p class="cf-empty">这里还没有文章。</p>

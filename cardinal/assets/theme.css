@@ -186,9 +186,11 @@ h1,h2,h3,h4 { font-family: var(--cf-heading-font); }
 .cf-toc a[aria-current="true"] { color: var(--color-accent); font-weight: 600; }
 .cf-toc-num { color: var(--color-text-tertiary); margin-right: 0.4rem; font-family: ui-monospace, monospace; font-size: 0.78rem; }
 
-.cf-post-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 3rem 0; padding-top: 2rem; border-top: 1px solid var(--color-border); }
+.cf-post-nav { display: flex; gap: 1rem; margin: 3rem 0; padding-top: 2rem; border-top: 1px solid var(--color-border); }
 .cf-post-nav a { text-decoration: none; color: var(--color-text-secondary); font-size: 0.82rem; max-width: 48%; }
 .cf-post-nav a:hover { color: var(--color-accent); }
+.cf-post-nav a[rel="prev"] { margin-right: auto; }
+.cf-post-nav a[rel="next"] { margin-left: auto; }
 
 /* === 评论区（复用平台 sb-* 结构但 cf-* 样式） === */
 .cf-comments { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border); }

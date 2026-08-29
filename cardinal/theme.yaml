@@ -1,6 +1,6 @@
 slug: cardinal
 name: Cardinal
-version: 3.3.3
+version: 3.3.4
 author:
   name: SeanBlog Frame
 description: 高自由度可配置主题，Aurora/Lazzaro 风格。侧边栏、列表样式、Hero、字体、色彩模式、圆角、阴影、毛玻璃、代码块等全量自定义。
@@ -170,11 +170,11 @@ settingsSchema:
           - { label: 居中极简, value: minimal }
           - { label: 渐变横幅, value: banner }
           - { label: 全屏封面, value: fullscreen }
-      - key: showFeaturedSection
-        label: 精选文章区
+      - key: showPinned
+        label: 置顶文章区
         type: boolean
-        default: false
-        description: 首页拆分精选置顶 + 最新文章
+        default: true
+        description: 首页顶部单独展示置顶文章；关闭则置顶文章按顺序混入最新列表
   视觉风格:
     色彩:
       - key: colorMode
@@ -265,6 +265,13 @@ settingsSchema:
       type: boolean
       default: true
       description: 文章详情页独立显示目录侧栏（滚动吸顶+容器内滚动）；关闭则跟随首页侧栏设置
+    - key: articleNavOrder
+      label: 上下篇排序依据
+      type: select
+      default: publishedAt
+      options:
+        - { label: 发布时间, value: publishedAt }
+        - { label: 更新时间, value: updatedAt }
     - key: articleMetaItems
       label: 文章元信息
       type: multiselect
