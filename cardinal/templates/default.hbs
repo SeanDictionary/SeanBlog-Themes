@@ -9,14 +9,20 @@
   {{{theme_css}}}
   {{{callout_css}}}
 </head>
-<body class="cf-body cf-page-{{page}}" data-font="{{theme.config.fontFamily}}" data-heading="{{theme.config.headingFontFamily}}" data-radius="{{theme.config.borderRadius}}" data-shadow="{{theme.config.shadowStyle}}" data-width="{{theme.config.contentWidth}}" data-list="{{theme.config.articleListStyle}}" data-sep="{{theme.config.listSeparator}}" data-hero="{{theme.config.heroStyle}}" data-sidebar="{{theme.config.sidebarPosition}}" data-sticky="{{theme.config.sidebarSticky}}" data-header="{{theme.config.headerBehavior}}" data-blur="{{theme.config.headerBlur}}" data-show-line-numbers="{{theme.config.showCodeLineNumbers}}" data-code-theme="{{theme.config.codeBlockTheme}}">
+<body class="cf-body cf-page-{{page}}" data-font="{{theme.config.fontFamily}}" data-heading="{{theme.config.headingFontFamily}}" data-radius="{{theme.config.borderRadius}}" data-shadow="{{theme.config.shadowStyle}}" data-width="{{theme.config.contentWidth}}" data-list="{{theme.config.articleListStyle}}" data-sep="{{theme.config.listSeparator}}" data-hero="{{theme.config.heroStyle}}" data-sidebar="{{theme.config.sidebarPosition}}" data-sticky="{{theme.config.sidebarSticky}}" data-header="{{theme.config.headerBehavior}}" data-blur="{{theme.config.headerBlur}}" data-show-line-numbers="{{theme.config.showCodeLineNumbers}}" data-code-theme="{{theme.config.codeBlockTheme}}" data-nav-align="{{theme.config.navAlignment}}" data-toc-only="{{#eq page "post"}}{{#eq theme.config.showPostToc true}}true{{/eq}}{{/eq}}">
   {{#eq theme.config.showTopBar true}}{{> header}}{{/eq}}
   <div class="cf-layout">
-    {{#eq theme.config.sidebarPosition "left"}}{{> sidebar}}{{/eq}}
+    {{#eq theme.config.sidebarPosition "left"}}
+      {{#eq page "post"}}{{#eq theme.config.showPostToc true}}{{> post-toc-sidebar}}{{else}}{{> sidebar}}{{/eq}}{{else}}{{> sidebar}}{{/eq}}
+    {{/eq}}
     <main class="cf-main">
       {{{body}}}
     </main>
-    {{#eq theme.config.sidebarPosition "right"}}{{> sidebar}}{{/eq}}
+    {{#eq theme.config.sidebarPosition "right"}}
+      {{#eq page "post"}}{{#eq theme.config.showPostToc true}}{{> post-toc-sidebar}}{{else}}{{> sidebar}}{{/eq}}{{else}}{{> sidebar}}{{/eq}}
+    {{/eq}}
+    {{!-- sidebarPosition=none 但文章页开启 TOC：右侧补一个目录侧栏 --}}
+    {{#eq theme.config.sidebarPosition "none"}}{{#eq page "post"}}{{#eq theme.config.showPostToc true}}{{> post-toc-sidebar}}{{/eq}}{{/eq}}{{/eq}}
   </div>
   {{> footer}}
   {{> search-dialog}}

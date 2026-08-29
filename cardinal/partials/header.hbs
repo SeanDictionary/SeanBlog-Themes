@@ -1,12 +1,15 @@
 <header class="cf-header" data-cf-header>
-  <div class="cf-header-inner">
-    <a href="/" class="cf-brand">{{site.title}}</a>
-    <nav class="cf-nav">
-      <a href="/">首页</a>
-      <a href="/categories">分类</a>
-      <a href="/tags">标签</a>
-      <button type="button" data-sb-search aria-label="搜索"><i class="fa-solid fa-magnifying-glass"></i></button>
-      {{#eq theme.config.showThemeToggle true}}<button type="button" data-sb-theme-toggle aria-label="切换深浅色"><i class="fa-solid fa-circle-half-stroke"></i></button>{{/eq}}
-    </nav>
+  <div class="cf-header-inner" data-nav-align="{{theme.config.navAlignment}}">
+    <div class="cf-header-left">
+      {{#eq theme.config.showSiteName true}}<a href="/" class="cf-brand">{{site.title}}</a>{{/eq}}
+      <nav class="cf-nav">
+        {{#each theme.config.navItems}}<a href="{{link}}" class="cf-nav-item">{{{label}}}</a>{{/each}}
+        {{#eq theme.config.showSearch true}}{{#eq theme.config.searchPosition "follow-menu"}}<button type="button" data-sb-search class="cf-nav-item cf-icon-btn" aria-label="搜索"><i class="fa-solid fa-magnifying-glass"></i></button>{{/eq}}{{/eq}}
+      </nav>
+    </div>
+    <div class="cf-header-actions">
+      {{#eq theme.config.showSearch true}}{{#eq theme.config.searchPosition "right-side"}}<button type="button" data-sb-search class="cf-icon-btn" aria-label="搜索"><i class="fa-solid fa-magnifying-glass"></i></button>{{/eq}}{{/eq}}
+      {{#eq theme.config.showThemeToggle true}}<button type="button" data-sb-theme-toggle class="cf-icon-btn" aria-label="切换深浅色"><i class="fa-solid fa-circle-half-stroke"></i></button>{{/eq}}
+    </div>
   </div>
 </header>

@@ -1,50 +1,63 @@
 <aside class="cf-sidebar">
   {{#each theme.config.sidebarContent}}
     {{#eq this "profile"}}
-    <div class="cf-widget">
+    <div class="cf-widget cf-widget-profile">
+      {{#if ../theme.config.profileAvatar}}<img src="{{../theme.config.profileAvatar}}" alt="{{../site.title}}" class="cf-profile-avatar" style="border-radius:{{../theme.config.profileAvatarRadius}}%">{{/if}}
       <p class="cf-profile-name">{{../site.title}}</p>
+      {{#if ../theme.config.profileSignature}}<p class="cf-profile-signature">{{../theme.config.profileSignature}}</p>{{/if}}
       {{#if ../site.description}}<p class="cf-profile-desc">{{../site.description}}</p>{{/if}}
+      {{#if ../theme.config.profileCustomHtml}}{{{../theme.config.profileCustomHtml}}}{{/if}}
     </div>
-    {{/eq}}
-    {{#eq this "recent"}}
-    {{#if ../sidebarData.recentArticles.length}}
-    <div class="cf-widget">
-      <p class="cf-widget-title">最近文章</p>
-      <ul class="cf-recent-list">
-        {{#each ../sidebarData.recentArticles}}
-        <li><a href="/articles/{{slug}}">{{title}}</a>{{#if publishedAt}}<span class="cf-recent-time">{{format_date publishedAt format="MM-DD"}}</span>{{/if}}</li>
-        {{/each}}
-      </ul>
-    </div>
-    {{/if}}
     {{/eq}}
     {{#eq this "tags"}}
     {{#if ../sidebarData.tags.length}}
-    <div class="cf-widget">
+    <div class="cf-widget cf-widget-tags">
       <p class="cf-widget-title">标签</p>
-      <div class="cf-tag-cloud">
-        {{#each ../sidebarData.tags}}<a href="/tags/{{slug}}">{{name}}</a>{{/each}}
+      <div class="cf-tag-cloud cf-tag-cloud--limited">
+        {{#limit ../sidebarData.tags ../theme.config.sidebarTagsLimit}}
+        <a href="/tags/{{slug}}">{{name}}</a>
+        {{/limit}}
       </div>
+      {{#gt ../sidebarData.tags.length ../theme.config.sidebarTagsLimit}}
+      <button type="button" class="cf-more-btn" data-cf-open-modal="tags">更多</button>
+      <div class="cf-modal" data-cf-modal="tags" hidden>
+        <div class="cf-modal-backdrop" data-cf-close-modal></div>
+        <div class="cf-modal-panel">
+          <div class="cf-modal-head"><span>全部标签</span><button type="button" class="cf-modal-close" data-cf-close-modal aria-label="关闭"><i class="fa-solid fa-xmark"></i></button></div>
+          <div class="cf-modal-body">
+            <div class="cf-tag-cloud">
+              {{#each ../sidebarData.tags}}<a href="/tags/{{slug}}">{{name}}</a>{{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/gt}}
     </div>
     {{/if}}
     {{/eq}}
     {{#eq this "categories"}}
     {{#if ../sidebarData.categories.length}}
-    <div class="cf-widget">
+    <div class="cf-widget cf-widget-categories">
       <p class="cf-widget-title">分类</p>
-      <ul class="cf-cat-list">
-        {{#each ../sidebarData.categories}}<li><a href="/categories/{{slug}}">{{name}}</a><span class="cf-cat-count">{{count}}</span></li>{{/each}}
+      <ul class="cf-cat-list cf-cat-list--limited">
+        {{#limit ../sidebarData.categories ../theme.config.sidebarCategoriesLimit}}
+        <li><a href="/categories/{{slug}}">{{name}}</a><span class="cf-cat-count">{{count}}</span></li>
+        {{/limit}}
       </ul>
-    </div>
-    {{/if}}
-    {{/eq}}
-    {{#eq this "toc"}}
-    {{#if ../toc.length}}
-    <div class="cf-widget">
-      <p class="cf-widget-title">目录</p>
-      <nav data-sb-toc>
-        {{#each ../toc}}<a href="#{{id}}" style="padding-left:{{level}}rem">{{text}}</a>{{/each}}
-      </nav>
+      {{#gt ../sidebarData.categories.length ../theme.config.sidebarCategoriesLimit}}
+      <button type="button" class="cf-more-btn" data-cf-open-modal="categories">更多</button>
+      <div class="cf-modal" data-cf-modal="categories" hidden>
+        <div class="cf-modal-backdrop" data-cf-close-modal></div>
+        <div class="cf-modal-panel">
+          <div class="cf-modal-head"><span>全部分类</span><button type="button" class="cf-modal-close" data-cf-close-modal aria-label="关闭"><i class="fa-solid fa-xmark"></i></button></div>
+          <div class="cf-modal-body">
+            <ul class="cf-cat-list">
+              {{#each ../sidebarData.categories}}<li><a href="/categories/{{slug}}">{{name}}</a><span class="cf-cat-count">{{count}}</span></li>{{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {{/gt}}
     </div>
     {{/if}}
     {{/eq}}

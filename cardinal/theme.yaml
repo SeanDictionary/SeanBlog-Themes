@@ -1,6 +1,6 @@
 slug: cardinal
 name: Cardinal
-version: 3.2.6
+version: 3.3.0
 author:
   name: SeanBlog Frame
 description: 高自由度可配置主题，Aurora/Lazzaro 风格。侧边栏、列表样式、Hero、字体、色彩模式、圆角、阴影、毛玻璃、代码块等全量自定义。
@@ -18,6 +18,45 @@ settingsSchema:
         type: boolean
         default: true
         description: 关闭后品牌和导航移入侧边栏
+      - key: showSiteName
+        label: 显示站点名称
+        type: boolean
+        default: true
+        if: "showTopBar === true"
+      - key: showSearch
+        label: 显示搜索按钮
+        type: boolean
+        default: true
+        if: "showTopBar === true"
+      - key: searchPosition
+        label: 搜索按钮位置
+        type: select
+        default: right-side
+        if: "showSearch === true"
+        options:
+          - { label: 跟随菜单项, value: follow-menu }
+          - { label: 右侧固定, value: right-side }
+      - key: navAlignment
+        label: 菜单项对齐
+        type: select
+        default: right
+        if: "showTopBar === true"
+        options:
+          - { label: 左侧, value: left }
+          - { label: 居中, value: center }
+          - { label: 右侧, value: right }
+      - key: navItems
+        label: 菜单项
+        type: list
+        default:
+          - { link: /, label: 首页 }
+          - { link: /categories, label: 分类 }
+          - { link: /tags, label: 标签 }
+        if: "showTopBar === true"
+        description: 链接与名称均可改；名称支持图标，如 <i class="fa-solid fa-house"></i> 首页
+        itemFields:
+          - { key: link, label: 链接, type: text }
+          - { key: label, label: 名称, type: text }
       - key: headerBehavior
         label: 顶部栏行为
         type: select
@@ -48,14 +87,50 @@ settingsSchema:
       - key: sidebarContent
         label: 侧边栏内容
         type: multiselect
-        default: ["profile", "recent", "tags"]
+        default: ["profile", "tags"]
         if: "sidebarPosition !== 'none'"
         options:
           - { label: 个人简介, value: profile }
-          - { label: 最近文章, value: recent }
           - { label: 标签云, value: tags }
           - { label: 分类列表, value: categories }
-          - { label: 文章目录, value: toc }
+      - key: profileAvatar
+        label: 个人简介头像
+        type: text
+        default: ""
+        if: "'profile' in sidebarContent"
+        description: http(s):// 外链或 / 开头的本地路径；留空则不显示
+      - key: profileAvatarRadius
+        label: 头像圆角
+        type: range
+        default: 50
+        min: 0
+        max: 50
+        step: 1
+        if: "'profile' in sidebarContent"
+        description: 0=方形，50=圆形
+      - key: profileSignature
+        label: 个人简介签名
+        type: text
+        default: ""
+        if: "'profile' in sidebarContent"
+      - key: profileCustomHtml
+        label: 个人简介自定义HTML
+        type: textarea
+        default: ""
+        if: "'profile' in sidebarContent"
+        description: 追加到个人简介末尾，支持任意 HTML
+      - key: sidebarTagsLimit
+        label: 标签云显示数量
+        type: number
+        default: 10
+        if: "'tags' in sidebarContent"
+        description: 超出部分通过「更多」弹窗查看
+      - key: sidebarCategoriesLimit
+        label: 分类列表显示数量
+        type: number
+        default: 10
+        if: "'categories' in sidebarContent"
+        description: 超出部分通过「更多」弹窗查看
     内容区:
       - key: contentWidth
         label: 内容宽度
@@ -185,6 +260,11 @@ settingsSchema:
         type: boolean
         default: true
   文章详情:
+    - key: showPostToc
+      label: 文章目录侧栏
+      type: boolean
+      default: true
+      description: 文章详情页独立显示目录侧栏（滚动吸顶+容器内滚动）；关闭则跟随首页侧栏设置
     - key: articleMetaItems
       label: 文章元信息
       type: multiselect

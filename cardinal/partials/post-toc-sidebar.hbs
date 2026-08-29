@@ -1,0 +1,10 @@
+<aside class="cf-sidebar cf-sidebar-toc">
+  {{#if toc.length}}
+  <div class="cf-widget cf-widget-toc">
+    <p class="cf-widget-title">目录</p>
+    <nav class="cf-toc-nav" data-sb-toc>
+      {{#each toc}}<a href="#{{id}}" class="cf-toc-link" style="padding-left:{{level}}rem">{{text}}</a>{{/each}}
+    </nav>
+  </div>
+  {{/if}}
+</aside>

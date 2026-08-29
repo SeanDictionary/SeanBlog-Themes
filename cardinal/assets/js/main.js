@@ -74,6 +74,28 @@
     }
   })
 
+  // 侧边栏标签/分类「更多」弹窗
+  ready(function () {
+    function open(modal) { modal.hidden = false; document.body.style.overflow = 'hidden' }
+    function close(modal) { modal.hidden = true; document.body.style.overflow = '' }
+    document.querySelectorAll('[data-cf-open-modal]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var m = document.querySelector('[data-cf-modal="' + btn.getAttribute('data-cf-open-modal') + '"]')
+        if (m) open(m)
+      })
+    })
+    document.querySelectorAll('[data-cf-close-modal]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var m = el.closest('[data-cf-modal]')
+        if (m) close(m)
+      })
+    })
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return
+      document.querySelectorAll('[data-cf-modal]:not([hidden])').forEach(close)
+    })
+  })
+
   // 返回顶部按钮显隐
   ready(function () {
     var btn = document.querySelector('[data-cf-back-to-top]')
