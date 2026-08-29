@@ -3,7 +3,7 @@
     <div class="cf-header-left">
       {{#eq theme.config.showSiteName true}}<a href="/" class="cf-brand">{{site.title}}</a>{{/eq}}
       <nav class="cf-nav">
-        {{#each theme.config.navItems}}<a href="{{link}}" class="cf-nav-item">{{{label}}}</a>{{/each}}
+        {{#each theme.config.navItems}}<a href="{{link}}" class="cf-nav-item"{{#eq target "_blank"}} target="_blank" rel="noopener noreferrer"{{/eq}}>{{{label}}}</a>{{/each}}
         {{#eq theme.config.showSearch true}}{{#eq theme.config.searchPosition "follow-menu"}}<button type="button" data-sb-search class="cf-nav-item cf-icon-btn" aria-label="搜索"><i class="fa-solid fa-magnifying-glass"></i></button>{{/eq}}{{/eq}}
       </nav>
     </div>
