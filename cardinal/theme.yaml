@@ -1,6 +1,6 @@
 slug: cardinal
 name: Cardinal
-version: 3.2.4
+version: 3.2.5
 author:
   name: SeanBlog Frame
 description: 高自由度可配置主题，Aurora/Lazzaro 风格。侧边栏、列表样式、Hero、字体、色彩模式、圆角、阴影、毛玻璃、代码块等全量自定义。
@@ -12,174 +12,178 @@ assets:
   js: assets/js/main.js
 settingsSchema:
   布局结构:
-    - key: showTopBar
-      label: 显示顶部栏
-      type: boolean
-      default: true
-      description: 关闭后品牌和导航移入侧边栏
-    - key: headerBehavior
-      label: 顶部栏行为
-      type: select
-      default: fixed-always
-      if: "showTopBar === true"
-      options:
-        - { label: 始终固定, value: fixed-always }
-        - { label: 滚动隐藏, value: collapse-on-scroll }
-        - { label: 仅顶部, value: static }
-    - key: sidebarPosition
-      label: 侧边栏位置
-      type: select
-      default: right
-      options:
-        - { label: 无, value: none }
-        - { label: 左侧, value: left }
-        - { label: 右侧, value: right }
-    - key: sidebarSticky
-      label: 侧边栏固定
-      type: select
-      default: sticky
-      if: "sidebarPosition !== 'none'"
-      options:
-        - { label: 不固定, value: static }
-        - { label: 滚动吸顶, value: sticky }
-        - { label: 全屏固定, value: fixed }
-    - key: sidebarContent
-      label: 侧边栏内容
-      type: multiselect
-      default: ["profile", "recent", "tags"]
-      if: "sidebarPosition !== 'none'"
-      options:
-        - { label: 个人简介, value: profile }
-        - { label: 最近文章, value: recent }
-        - { label: 标签云, value: tags }
-        - { label: 分类列表, value: categories }
-        - { label: 文章目录, value: toc }
-    - key: contentWidth
-      label: 内容宽度
-      type: select
-      default: medium
-      options:
-        - { label: 窄 (36rem), value: narrow }
-        - { label: 中 (48rem), value: medium }
-        - { label: 宽 (60rem), value: wide }
-    - key: articleListStyle
-      label: 文章列表样式
-      type: select
-      default: list
-      options:
-        - { label: 文字列表, value: list }
-        - { label: 卡片网格, value: cards }
-    - key: listSeparator
-      label: 列表分隔方式
-      type: select
-      default: border
-      if: "articleListStyle === 'list'"
-      options:
-        - { label: 底线分隔, value: border }
-        - { label: 间距分隔, value: gap }
-        - { label: 卡片包裹, value: card }
-    - key: showHeroSection
-      label: 首页 Hero 区
-      type: boolean
-      default: true
-    - key: heroStyle
-      label: Hero 区样式
-      type: select
-      default: minimal
-      if: "showHeroSection === true"
-      options:
-        - { label: 居中极简, value: minimal }
-        - { label: 渐变横幅, value: banner }
-        - { label: 全屏封面, value: fullscreen }
-    - key: showFeaturedSection
-      label: 精选文章区
-      type: boolean
-      default: false
-      description: 首页拆分精选置顶 + 最新文章
-    - key: showArticleNav
-      label: 上下篇导航
-      type: boolean
-      default: true
+    顶栏:
+      - key: showTopBar
+        label: 显示顶部栏
+        type: boolean
+        default: true
+        description: 关闭后品牌和导航移入侧边栏
+      - key: headerBehavior
+        label: 顶部栏行为
+        type: select
+        default: fixed-always
+        if: "showTopBar === true"
+        options:
+          - { label: 始终固定, value: fixed-always }
+          - { label: 滚动隐藏, value: collapse-on-scroll }
+          - { label: 仅顶部, value: static }
+    侧边栏:
+      - key: sidebarPosition
+        label: 侧边栏位置
+        type: select
+        default: right
+        options:
+          - { label: 无, value: none }
+          - { label: 左侧, value: left }
+          - { label: 右侧, value: right }
+      - key: sidebarSticky
+        label: 侧边栏固定
+        type: select
+        default: sticky
+        if: "sidebarPosition !== 'none'"
+        options:
+          - { label: 不固定, value: static }
+          - { label: 滚动吸顶, value: sticky }
+          - { label: 全屏固定, value: fixed }
+      - key: sidebarContent
+        label: 侧边栏内容
+        type: multiselect
+        default: ["profile", "recent", "tags"]
+        if: "sidebarPosition !== 'none'"
+        options:
+          - { label: 个人简介, value: profile }
+          - { label: 最近文章, value: recent }
+          - { label: 标签云, value: tags }
+          - { label: 分类列表, value: categories }
+          - { label: 文章目录, value: toc }
+    内容区:
+      - key: contentWidth
+        label: 内容宽度
+        type: select
+        default: medium
+        options:
+          - { label: 窄 (36rem), value: narrow }
+          - { label: 中 (48rem), value: medium }
+          - { label: 宽 (60rem), value: wide }
+      - key: articleListStyle
+        label: 文章列表样式
+        type: select
+        default: list
+        options:
+          - { label: 文字列表, value: list }
+          - { label: 卡片网格, value: cards }
+      - key: listSeparator
+        label: 列表分隔方式
+        type: select
+        default: border
+        if: "articleListStyle === 'list'"
+        options:
+          - { label: 底线分隔, value: border }
+          - { label: 间距分隔, value: gap }
+          - { label: 卡片包裹, value: card }
+    首页 Hero:
+      - key: showHeroSection
+        label: 首页 Hero 区
+        type: boolean
+        default: true
+      - key: heroStyle
+        label: Hero 区样式
+        type: select
+        default: minimal
+        if: "showHeroSection === true"
+        options:
+          - { label: 居中极简, value: minimal }
+          - { label: 渐变横幅, value: banner }
+          - { label: 全屏封面, value: fullscreen }
+      - key: showFeaturedSection
+        label: 精选文章区
+        type: boolean
+        default: false
+        description: 首页拆分精选置顶 + 最新文章
   视觉风格:
-    - key: colorMode
-      label: 色彩模式
-      type: select
-      default: dark
-      options:
-        - { label: 深色, value: dark }
-        - { label: 浅色, value: light }
-        - { label: 跟随系统, value: auto }
-    - key: showThemeToggle
-      label: 前台色彩切换按钮
-      type: boolean
-      default: true
-      if: "showTopBar === true"
-    - key: fontFamily
-      label: 正文字体
-      type: select
-      default: monospace
-      options:
-        - { label: 等宽, value: monospace }
-        - { label: 无衬线, value: sans }
-        - { label: 衬线, value: serif }
-    - key: headingFontFamily
-      label: 标题字体
-      type: select
-      default: same
-      options:
-        - { label: 跟随正文, value: same }
-        - { label: 等宽, value: monospace }
-        - { label: 无衬线, value: sans }
-        - { label: 衬线, value: serif }
-    - key: accentColor
-      label: 强调色
-      type: color
-      default: "#cf829e"
-      cssVariable: --color-accent
-    - key: borderRadius
-      label: 圆角大小
-      type: select
-      default: small
-      options:
-        - { label: 无, value: none }
-        - { label: 小, value: small }
-        - { label: 中, value: medium }
-        - { label: 大, value: large }
-    - key: shadowStyle
-      label: 阴影样式
-      type: select
-      default: none
-      options:
-        - { label: 无, value: none }
-        - { label: 浅, value: light }
-        - { label: 深, value: deep }
-    - key: headerBlur
-      label: 顶栏毛玻璃
-      type: boolean
-      default: true
-      if: "showTopBar === true"
-    - key: articleHeadingStyle
-      label: 文章标题装饰
-      type: select
-      default: default
-      options:
-        - { label: 默认下划线, value: default }
-        - { label: 彩色下划线, value: underline }
-        - { label: 左侧竖条, value: bar-left }
-    - key: codeBlockTheme
-      label: 代码块配色
-      type: select
-      default: one-dark
-      options:
-        - { label: One Dark, value: one-dark }
-        - { label: GitHub Dark, value: github-dark }
-        - { label: GitHub Light, value: github-light }
-        - { label: Nord, value: nord }
-        - { label: Dracula, value: dracula }
-    - key: showCodeLineNumbers
-      label: 代码块行号
-      type: boolean
-      default: true
+    色彩:
+      - key: colorMode
+        label: 色彩模式
+        type: select
+        default: dark
+        options:
+          - { label: 深色, value: dark }
+          - { label: 浅色, value: light }
+          - { label: 跟随系统, value: auto }
+      - key: showThemeToggle
+        label: 前台色彩切换按钮
+        type: boolean
+        default: true
+        if: "showTopBar === true"
+      - key: accentColor
+        label: 强调色
+        type: color
+        default: "#cf829e"
+        cssVariable: --color-accent
+    字体:
+      - key: fontFamily
+        label: 正文字体
+        type: select
+        default: monospace
+        options:
+          - { label: 等宽, value: monospace }
+          - { label: 无衬线, value: sans }
+          - { label: 衬线, value: serif }
+      - key: headingFontFamily
+        label: 标题字体
+        type: select
+        default: same
+        options:
+          - { label: 跟随正文, value: same }
+          - { label: 等宽, value: monospace }
+          - { label: 无衬线, value: sans }
+          - { label: 衬线, value: serif }
+    形态:
+      - key: borderRadius
+        label: 圆角大小
+        type: select
+        default: small
+        options:
+          - { label: 无, value: none }
+          - { label: 小, value: small }
+          - { label: 中, value: medium }
+          - { label: 大, value: large }
+      - key: shadowStyle
+        label: 阴影样式
+        type: select
+        default: none
+        options:
+          - { label: 无, value: none }
+          - { label: 浅, value: light }
+          - { label: 深, value: deep }
+      - key: headerBlur
+        label: 顶栏毛玻璃
+        type: boolean
+        default: true
+        if: "showTopBar === true"
+      - key: articleHeadingStyle
+        label: 文章标题装饰
+        type: select
+        default: default
+        options:
+          - { label: 默认下划线, value: default }
+          - { label: 彩色下划线, value: underline }
+          - { label: 左侧竖条, value: bar-left }
+    代码块:
+      - key: codeBlockTheme
+        label: 代码块配色
+        type: select
+        default: one-dark
+        options:
+          - { label: One Dark, value: one-dark }
+          - { label: GitHub Dark, value: github-dark }
+          - { label: GitHub Light, value: github-light }
+          - { label: Nord, value: nord }
+          - { label: Dracula, value: dracula }
+      - key: showCodeLineNumbers
+        label: 代码块行号
+        type: boolean
+        default: true
   文章详情:
     - key: articleMetaItems
       label: 文章元信息
@@ -194,6 +198,10 @@ settingsSchema:
         - { label: 标签, value: tags }
     - key: showReadingTime
       label: 显示阅读时间
+      type: boolean
+      default: true
+    - key: showArticleNav
+      label: 上下篇导航
       type: boolean
       default: true
   页脚浮动:
