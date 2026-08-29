@@ -19,14 +19,15 @@
         {{/limit}}
       </div>
       {{#gt ../sidebarData.tags.length ../theme.config.sidebarTagsLimit}}
-      <button type="button" class="cf-more-btn" data-cf-open-modal="tags">更多</button>
-      <div class="cf-modal" data-cf-modal="tags" hidden>
-        <div class="cf-modal-backdrop" data-cf-close-modal></div>
-        <div class="cf-modal-panel">
-          <div class="cf-modal-head"><span>全部标签</span><button type="button" class="cf-modal-close" data-cf-close-modal aria-label="关闭"><i class="fa-solid fa-xmark"></i></button></div>
-          <div class="cf-modal-body">
-            <div class="cf-tag-cloud">
-              {{#each ../sidebarData.tags}}<a href="/tags/{{slug}}">{{name}}</a>{{/each}}
+      <button type="button" class="cf-more-btn" data-bs-toggle="modal" data-bs-target="#cf-modal-tags">更多</button>
+      <div class="modal fade" id="cf-modal-tags" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">全部标签</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button></div>
+            <div class="modal-body">
+              <div class="cf-tag-cloud">
+                {{#each ../sidebarData.tags}}<a href="/tags/{{slug}}">{{name}}</a>{{/each}}
+              </div>
             </div>
           </div>
         </div>
@@ -45,15 +46,16 @@
         {{/limit}}
       </ul>
       {{#gt ../sidebarData.categories.length ../theme.config.sidebarCategoriesLimit}}
-      <button type="button" class="cf-more-btn" data-cf-open-modal="categories">更多</button>
-      <div class="cf-modal" data-cf-modal="categories" hidden>
-        <div class="cf-modal-backdrop" data-cf-close-modal></div>
-        <div class="cf-modal-panel">
-          <div class="cf-modal-head"><span>全部分类</span><button type="button" class="cf-modal-close" data-cf-close-modal aria-label="关闭"><i class="fa-solid fa-xmark"></i></button></div>
-          <div class="cf-modal-body">
-            <ul class="cf-cat-list">
-              {{#each ../sidebarData.categories}}<li><a href="/categories/{{slug}}">{{name}}</a><span class="cf-cat-count">{{count}}</span></li>{{/each}}
-            </ul>
+      <button type="button" class="cf-more-btn" data-bs-toggle="modal" data-bs-target="#cf-modal-categories">更多</button>
+      <div class="modal fade" id="cf-modal-categories" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">全部分类</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button></div>
+            <div class="modal-body">
+              <ul class="cf-cat-list">
+                {{#each ../sidebarData.categories}}<li><a href="/categories/{{slug}}">{{name}}</a><span class="cf-cat-count">{{count}}</span></li>{{/each}}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

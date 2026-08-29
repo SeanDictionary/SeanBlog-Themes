@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{site.locale}}" data-theme="{{#eq theme.config.colorMode "light"}}light{{else}}dark{{/eq}}">
+<html lang="{{site.locale}}" data-bs-theme="{{#eq theme.config.colorMode "light"}}light{{else}}dark{{/eq}}" data-theme="{{#eq theme.config.colorMode "light"}}light{{else}}dark{{/eq}}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   {{{font_awesome}}}
   {{{seo_head}}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="{{asset "assets/theme.css"}}">
   {{{theme_css}}}
   {{{callout_css}}}
@@ -31,8 +32,9 @@
   {{> search-dialog}}
   {{#eq theme.config.showBackToTop true}}<button class="cf-back-to-top" data-cf-back-to-top aria-label="返回顶部"><i class="fa-solid fa-arrow-up"></i></button>{{/eq}}
   {{#eq theme.config.showCommentJumpButton true}}{{#eq page "post"}}{{#ne commentsMode "disabled"}}<button class="cf-comment-jump" data-cf-comment-jump aria-label="跳转评论"><i class="fa-solid fa-comment"></i></button>{{/ne}}{{/eq}}{{/eq}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js" referrerpolicy="no-referrer" defer></script>
   <script src="{{asset "assets/js/main.js"}}" defer></script>
 {{{platform_enhance}}}
-  <script>(function(){var m="{{theme.config.colorMode}}";if(document.cookie.indexOf("sb-theme=")>=0){var c=(document.cookie.match(/sb-theme=(dark|light)/)||[])[1];if(c)document.documentElement.setAttribute("data-theme",c);}else if(m==="auto"){try{document.documentElement.setAttribute("data-theme",matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}catch(e){}}})();</script>
+  <script>(function(){var m="{{theme.config.colorMode}}";if(document.cookie.indexOf("sb-theme=")>=0){var c=(document.cookie.match(/sb-theme=(dark|light)/)||[])[1];if(c)document.documentElement.setAttribute("data-bs-theme",c),document.documentElement.setAttribute("data-theme",c);}else if(m==="auto"){try{var d=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-bs-theme",d),document.documentElement.setAttribute("data-theme",d);}catch(e){}}})();</script>
 </body>
 </html>

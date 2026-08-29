@@ -490,3 +490,46 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
   .cf-toc-nav { overflow-y: visible; }
   .cf-modal-panel { max-height: 90vh; }
 }
+
+/* === Bootstrap 桥接：主题变量映射到 BS 组件 === */
+:root {
+  --bs-body-font-family: var(--cf-font);
+  --bs-body-bg: var(--color-bg);
+  --bs-body-color: var(--color-text);
+  --bs-border-color: var(--color-border);
+  --bs-border-radius: var(--cf-radius);
+  --bs-border-radius-sm: var(--cf-radius-sm);
+  --bs-link-color-rgb: 207, 130, 158;
+  --bs-link-hover-color-rgb: 221, 167, 189;
+  --bs-primary: var(--color-accent);
+  --bs-emphasis-color: var(--color-text);
+  --bs-secondary-color: var(--color-text-secondary);
+  --bs-tertiary-color: var(--color-text-tertiary);
+  --bs-secondary-bg: var(--color-bg-secondary);
+  --bs-tertiary-bg: var(--color-bg-tertiary);
+}
+.cf-body { background: var(--bs-body-bg); color: var(--bs-body-color); }
+.btn-primary { --bs-btn-bg: var(--color-accent); --bs-btn-border-color: var(--color-accent); --bs-btn-hover-bg: var(--color-accent-hover); --bs-btn-hover-border-color: var(--color-accent-hover); --bs-btn-active-bg: var(--color-accent); --bs-btn-active-border-color: var(--color-accent); --bs-btn-color: #fff; --bs-btn-hover-color: #fff; --bs-btn-active-color: #fff; }
+.btn-outline-secondary { --bs-btn-color: var(--color-text-secondary); --bs-btn-border-color: var(--color-border); --bs-btn-hover-bg: var(--color-bg-secondary); --bs-btn-hover-border-color: var(--color-border); --bs-btn-hover-color: var(--color-text); --bs-btn-active-bg: var(--color-bg-secondary); --bs-btn-active-border-color: var(--color-border); }
+.card { background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--cf-radius); box-shadow: var(--cf-card-shadow); color: var(--color-text); }
+.card-title { font-family: var(--cf-heading-font); }
+.card-title a { color: var(--color-text); text-decoration: none; }
+.card-title a:hover { color: var(--color-accent); }
+.card-text { color: var(--color-text-secondary); font-size: 0.9rem; }
+.modal-content { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--cf-radius-lg); color: var(--color-text); }
+.modal-header { border-bottom-color: var(--color-border); }
+.modal-body .cf-tag-cloud a, .modal-body .cf-cat-list a { color: var(--color-text-secondary); text-decoration: none; }
+.modal-body .cf-tag-cloud a:hover, .modal-body .cf-cat-list a:hover { color: var(--color-accent); }
+.form-control, .form-select { background: var(--color-bg); border: 1px solid var(--color-border); color: var(--color-text); border-radius: var(--cf-radius-sm); font-family: var(--cf-font); }
+.form-control:focus, .form-select:focus { background: var(--color-bg); border-color: var(--color-accent); color: var(--color-text); box-shadow: 0 0 0 3px var(--color-accent-subtle); }
+.form-control::placeholder { color: var(--color-text-tertiary); }
+.page-link { color: var(--color-text-secondary); background: transparent; border: 1px solid var(--color-border); }
+.page-link:hover { color: var(--color-text); background: var(--color-bg-secondary); }
+.page-item.active .page-link { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
+.navbar { --bs-navbar-padding-y: 0; }
+.navbar-brand { color: var(--color-text); font-weight: 700; font-family: var(--cf-heading-font); }
+.navbar-brand:hover { color: var(--color-accent); }
+.nav-link { color: var(--color-text-secondary); font-size: 0.9rem; }
+.nav-link:hover, .nav-link:focus { color: var(--color-text); }
+.badge { --bs-badge-font-weight: 500; }
+.cf-icon-btn { display: inline-flex; align-items: center; justify-content: center; }
