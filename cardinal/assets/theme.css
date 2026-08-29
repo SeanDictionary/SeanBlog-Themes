@@ -462,6 +462,7 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
 .cf-modal-body .cf-tag-cloud { justify-content: flex-start; }
 
 /* === 文章详情：独立 TOC 侧栏 === */
+.cf-post-content :is(h2,h3,h4) { scroll-margin-top: calc(var(--header-height) + 1.5rem); }
 .cf-sidebar-toc { width: var(--cf-sidebar-width); flex-shrink: 0; position: sticky; top: calc(var(--header-height) + 1.5rem); max-height: calc(100vh - var(--header-height) - 3rem); overflow-y: auto; }
 .cf-toc-nav { display: flex; flex-direction: column; gap: 0.25rem; }
 .cf-toc-link { font-size: 0.8rem; color: var(--color-text-tertiary); text-decoration: none; line-height: 1.4; border-left: 2px solid transparent; padding-left: 0.5rem; transition: color .15s, border-color .15s; }
