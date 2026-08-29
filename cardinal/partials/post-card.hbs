@@ -1,32 +1,49 @@
 <article class="cf-card" data-card-style="{{#if (eq @root.theme.config.articleListStyle 'cards')}}card{{else}}list{{/if}}">
   {{#if (eq @root.theme.config.articleListStyle 'cards')}}
     {{#if (eq @root.theme.config.cardColumns '2')}}
-      {{#if (eq @root.theme.config.cardImageStyle 'banner')}}
-        {{#if coverImage}}
-        <div class="cf-card-banner">
-          <img src="{{coverImage}}" alt="" loading="lazy">
-          <div class="cf-card-banner-overlay"></div>
-          <h3 class="cf-card-title cf-card-title-banner" data-title-color="{{#if @root.theme.config.cardTitleColor}}{{@root.theme.config.cardTitleColor}}{{else}}auto{{/if}}"><a href="{{url}}">{{title}}</a></h3>
+      {{#if coverImage}}
+      <div class="cf-card-image-wrapper">
+        <img src="{{coverImage}}" alt="" loading="lazy">
+        <div class="cf-card-image-overlay"></div>
+        <h3 class="cf-card-title cf-card-title-overlay" data-title-color="{{#if @root.theme.config.cardTitleColor}}{{@root.theme.config.cardTitleColor}}{{else}}auto{{/if}}"><a href="{{url}}">{{title}}</a></h3>
+      </div>
+      <div class="cf-card-content">
+        {{#if excerpt}}<p class="cf-card-excerpt">{{truncate excerpt length=200}}</p>{{/if}}
+        <div class="cf-card-meta">
+          {{#if publishedAt}}<time datetime="{{format_date publishedAt format="YYYY-MM-DD"}}">{{format_date publishedAt format="MM-DD"}}</time>{{/if}}
+          {{#if category}}<a href="/categories/{{category.slug}}">{{category.name}}</a>{{/if}}
+          {{#if commentCount}}<span>{{commentCount}} 评论</span>{{/if}}
         </div>
-        {{else}}
-        <h3 class="cf-card-title"><a href="{{url}}">{{title}}</a></h3>
-        {{/if}}
+      </div>
       {{else}}
-        {{#if coverImage}}<a href="{{url}}" class="cf-card-cover"><img src="{{coverImage}}" alt="" loading="lazy"></a>{{/if}}
+      <div class="cf-card-content">
         <h3 class="cf-card-title"><a href="{{url}}">{{title}}</a></h3>
+        {{#if excerpt}}<p class="cf-card-excerpt">{{truncate excerpt length=200}}</p>{{/if}}
+        <div class="cf-card-meta">
+          {{#if publishedAt}}<time datetime="{{format_date publishedAt format="YYYY-MM-DD"}}">{{format_date publishedAt format="MM-DD"}}</time>{{/if}}
+          {{#if category}}<a href="/categories/{{category.slug}}">{{category.name}}</a>{{/if}}
+          {{#if commentCount}}<span>{{commentCount}} 评论</span>{{/if}}
+        </div>
+      </div>
       {{/if}}
     {{else}}
-      {{#if coverImage}}<a href="{{url}}" class="cf-card-cover"><img src="{{coverImage}}" alt="" loading="lazy"></a>{{/if}}
       <h3 class="cf-card-title"><a href="{{url}}">{{title}}</a></h3>
+      {{#if coverImage}}<a href="{{url}}" class="cf-card-cover"><img src="{{coverImage}}" alt="" loading="lazy"></a>{{/if}}
+      {{#if excerpt}}<p class="cf-card-excerpt">{{truncate excerpt length=200}}</p>{{/if}}
+      <div class="cf-card-meta">
+        {{#if publishedAt}}<time datetime="{{format_date publishedAt format="YYYY-MM-DD"}}">{{format_date publishedAt format="MM-DD"}}</time>{{/if}}
+        {{#if category}}<a href="/categories/{{category.slug}}">{{category.name}}</a>{{/if}}
+        {{#if commentCount}}<span>{{commentCount}} 评论</span>{{/if}}
+      </div>
     {{/if}}
   {{else}}
     <h3 class="cf-card-title"><a href="{{url}}">{{title}}</a></h3>
     {{#if coverImage}}<a href="{{url}}" class="cf-card-cover"><img src="{{coverImage}}" alt="" loading="lazy"></a>{{/if}}
+    {{#if excerpt}}<p class="cf-card-excerpt">{{truncate excerpt length=200}}</p>{{/if}}
+    <div class="cf-card-meta">
+      {{#if publishedAt}}<time datetime="{{format_date publishedAt format="YYYY-MM-DD"}}">{{format_date publishedAt format="MM-DD"}}</time>{{/if}}
+      {{#if category}}<a href="/categories/{{category.slug}}">{{category.name}}</a>{{/if}}
+      {{#if commentCount}}<span>{{commentCount}} 评论</span>{{/if}}
+    </div>
   {{/if}}
-  {{#if excerpt}}<p class="cf-card-excerpt">{{excerpt}}</p>{{/if}}
-  <div class="cf-card-meta">
-    {{#if publishedAt}}<time datetime="{{format_date publishedAt format="YYYY-MM-DD"}}">{{format_date publishedAt format="MM-DD"}}</time>{{/if}}
-    {{#if category}}<a href="/categories/{{category.slug}}">{{category.name}}</a>{{/if}}
-    {{#if commentCount}}<span>{{commentCount}} 评论</span>{{/if}}
-  </div>
 </article>
