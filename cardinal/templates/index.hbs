@@ -4,7 +4,7 @@
 {{#if pinned.length}}
 <section class="cf-featured">
   <p class="cf-list-title">置顶</p>
-  <div class="cf-posts">
+  <div class="cf-posts" data-card-columns="{{#if theme.config.cardColumns}}{{theme.config.cardColumns}}{{else}}2{{/if}}" data-card-image-style="{{#if theme.config.cardImageStyle}}{{theme.config.cardImageStyle}}{{else}}default{{/if}}" data-title-color="{{#if theme.config.cardTitleColor}}{{theme.config.cardTitleColor}}{{else}}auto{{/if}}">
     {{#each pinned}}{{> post-card}}{{/each}}
   </div>
 </section>
@@ -19,7 +19,7 @@
     </nav>
   </div>
   {{#if posts.length}}
-  <div class="cf-posts">
+  <div class="cf-posts" data-card-columns="{{#if theme.config.cardColumns}}{{theme.config.cardColumns}}{{else}}2{{/if}}" data-card-image-style="{{#if theme.config.cardImageStyle}}{{theme.config.cardImageStyle}}{{else}}default{{/if}}" data-title-color="{{#if theme.config.cardTitleColor}}{{theme.config.cardTitleColor}}{{else}}auto{{/if}}">
     {{#eq theme.config.showPinned true}}
       {{#each posts}}{{#unless isPinned}}{{> post-card}}{{/unless}}{{/each}}
     {{else}}

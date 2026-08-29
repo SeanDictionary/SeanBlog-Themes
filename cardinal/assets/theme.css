@@ -389,23 +389,35 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
 
 /* === 文章卡片 === */
 .cf-posts { display: flex; flex-direction: column; }
-[data-list="cards"] .cf-posts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-.cf-card { text-decoration: none; color: inherit; transition: all .15s; }
-[data-sep="border"] .cf-card { padding: 1.25rem 0; border-bottom: 1px solid var(--color-border); }
-[data-sep="border"] .cf-card:first-child { padding-top: 0; }
-[data-sep="gap"] .cf-card { margin-bottom: 1.5rem; }
-[data-sep="card"] .cf-card { background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--cf-radius); padding: 1.25rem; box-shadow: var(--cf-card-shadow); margin-bottom: 1rem; }
-.cf-card:hover { border-color: var(--color-border-hover); }
+[data-list="cards"] .cf-posts { display: block; column-gap: 1.5rem; }
+[data-list="cards"] .cf-posts[data-card-columns="1"] { column-count: 1; }
+[data-list="cards"] .cf-posts[data-card-columns="2"] { column-count: 2; }
+[data-list="cards"] .cf-card { display: block; break-inside: avoid; margin-bottom: 1.5rem; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--cf-radius); padding: 1.25rem; box-shadow: var(--cf-card-shadow); max-height: 600px; overflow: hidden; }
+[data-list="cards"] .cf-card:hover { border-color: var(--color-border-hover); }
+[data-list="cards"] .cf-card-cover { display: block; margin-bottom: 0.75rem; border-radius: var(--cf-radius-sm); overflow: hidden; }
+[data-list="cards"] .cf-card-cover img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+[data-list="cards"] .cf-card-excerpt { font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7; margin: 0 0 0.6rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* 列表模式分隔 */
+[data-list="list"][data-sep="border"] .cf-card { padding: 1.25rem 0; border-bottom: 1px solid var(--color-border); }
+[data-list="list"][data-sep="border"] .cf-card:first-child { padding-top: 0; }
+[data-list="list"][data-sep="gap"] .cf-card { margin-bottom: 1.5rem; }
 .cf-card-title { font-size: 1.05rem; font-weight: 600; line-height: 1.4; margin: 0 0 0.6rem; font-family: var(--cf-heading-font); }
 .cf-card-title a { color: inherit; text-decoration: none; transition: color .15s; }
 .cf-card:hover .cf-card-title a { color: var(--color-accent); }
-.cf-card-cover { border-radius: var(--cf-radius-sm); overflow: hidden; }
-.cf-card-cover img { object-fit: cover; transition: transform .25s; }
-.cf-card:hover .cf-card-cover img { transform: scale(1.04); }
-.cf-card-excerpt { font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7; margin: 0 0 0.6rem; }
 .cf-card-meta { clear: left; display: flex; gap: 0.6rem; font-size: 0.72rem; color: var(--color-text-tertiary); flex-wrap: wrap; }
 .cf-card-meta a { text-decoration: none; }
 .cf-card-meta a:hover { color: var(--color-text-secondary); }
+
+/* 横幅头图样式 */
+[data-card-image-style="banner"] .cf-card-banner { position: relative; height: 200px; margin: -1.25rem -1.25rem 0.75rem; border-radius: var(--cf-radius) var(--cf-radius) 0 0; overflow: hidden; }
+[data-card-image-style="banner"] .cf-card-banner img { width: 100%; height: 100%; object-fit: cover; }
+[data-card-image-style="banner"] .cf-card-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%); }
+[data-card-image-style="banner"] .cf-card-title-banner { position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem 1.25rem; margin: 0; font-size: 1.1rem; }
+[data-card-image-style="banner"] .cf-card-title-banner a { color: #fff; text-decoration: none; }
+[data-card-image-style="banner"][data-title-color="dark"] .cf-card-title-banner a { color: #1a1a1a; }
+[data-card-image-style="banner"][data-title-color="light"] .cf-card-title-banner a { color: #fff; }
+[data-card-image-style="banner"][data-title-color="auto"] .cf-card-title-banner a { color: #fff; }
 .cf-empty { text-align: center; padding: 4rem 0; color: var(--color-text-tertiary); }
 /* list 模式：标题行1 → 封面 float left + 摘要环绕 行2 → meta clear 行3 */
 [data-list="list"] .cf-card { display: block; }

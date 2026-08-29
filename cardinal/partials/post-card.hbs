@@ -1,6 +1,28 @@
-<article class="cf-card">
-  <h3 class="cf-card-title"><a href="{{url}}">{{title}}</a></h3>
-  {{#if coverImage}}<a href="{{url}}" class="cf-card-cover"><img src="{{coverImage}}" alt="" loading="lazy"></a>{{/if}}
+<article class="cf-card" data-card-style="{{#if (eq @root.theme.config.articleListStyle 'cards')}}card{{else}}list{{/if}}">
+  {{#if (eq @root.theme.config.articleListStyle 'cards')}}
+    {{#if (eq @root.theme.config.cardColumns '2')}}
+      {{#if (eq @root.theme.config.cardImageStyle 'banner')}}
+        {{#if coverImage}}
+        <div class="cf-card-banner">
+          <img src="{{coverImage}}" alt="" loading="lazy">
+          <div class="cf-card-banner-overlay"></div>
+          <h3 class="cf-card-title cf-card-title-banner" data-title-color="{{#if @root.theme.config.cardTitleColor}}{{@root.theme.config.cardTitleColor}}{{else}}auto{{/if}}"><a href="{{url}}">{{title}}</a></h3>
+        </div>
+        {{else}}
+        <h3 class="cf-card-title"><a href="{{url}}">{{title}}</a></h3>
+        {{/if}}
+      {{else}}
+        {{#if coverImage}}<a href="{{url}}" class="cf-card-cover"><img src="{{coverImage}}" alt="" loading="lazy"></a>{{/if}}
+        <h3 class="cf-card-title"><a href="{{url}}">{{title}}</a></h3>
+      {{/if}}
+    {{else}}
+      {{#if coverImage}}<a href="{{url}}" class="cf-card-cover"><img src="{{coverImage}}" alt="" loading="lazy"></a>{{/if}}
+      <h3 class="cf-card-title"><a href="{{url}}">{{title}}</a></h3>
+    {{/if}}
+  {{else}}
+    <h3 class="cf-card-title"><a href="{{url}}">{{title}}</a></h3>
+    {{#if coverImage}}<a href="{{url}}" class="cf-card-cover"><img src="{{coverImage}}" alt="" loading="lazy"></a>{{/if}}
+  {{/if}}
   {{#if excerpt}}<p class="cf-card-excerpt">{{excerpt}}</p>{{/if}}
   <div class="cf-card-meta">
     {{#if publishedAt}}<time datetime="{{format_date publishedAt format="YYYY-MM-DD"}}">{{format_date publishedAt format="MM-DD"}}</time>{{/if}}
