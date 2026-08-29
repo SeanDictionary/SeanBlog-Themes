@@ -72,9 +72,9 @@
 [data-theme="dark"][data-shadow="deep"] { --cf-shadow: 0 8px 24px rgba(0,0,0,0.5); --cf-card-shadow: 0 4px 12px rgba(0,0,0,0.4); }
 
 /* === 内容宽度 === */
-[data-width="narrow"] { --cf-content-width: 36rem; }
-[data-width="medium"] { --cf-content-width: 48rem; }
-[data-width="wide"] { --cf-content-width: 60rem; }
+[data-width="narrow"] { --cf-content-width: 48rem; }
+[data-width="medium"] { --cf-content-width: 60rem; }
+[data-width="wide"] { --cf-content-width: 72rem; }
 
 /* === 顶栏毛玻璃 === */
 [data-blur="true"] { --cf-header-bg: color-mix(in srgb, var(--color-bg) 80%, transparent); }
