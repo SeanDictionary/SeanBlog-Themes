@@ -1,6 +1,6 @@
 slug: cardinal
 name: Cardinal
-version: 3.3.5
+version: 3.3.6
 author:
   name: SeanBlog Frame
 description: 高自由度可配置主题，Aurora/Lazzaro 风格。侧边栏、列表样式、Hero、字体、色彩模式、圆角、阴影、毛玻璃、代码块等全量自定义。
@@ -200,20 +200,21 @@ settingsSchema:
       - key: fontFamily
         label: 正文字体
         type: select
-        default: monospace
+        default: sans
         options:
-          - { label: 等宽, value: monospace }
-          - { label: 无衬线, value: sans }
-          - { label: 衬线, value: serif }
+          - { label: 无衬线 Inter, value: sans }
+          - { label: 等宽 JetBrains Mono, value: monospace }
+          - { label: 衬线 Lora, value: serif }
       - key: headingFontFamily
         label: 标题字体
         type: select
-        default: same
+        default: display
         options:
           - { label: 跟随正文, value: same }
-          - { label: 等宽, value: monospace }
-          - { label: 无衬线, value: sans }
-          - { label: 衬线, value: serif }
+          - { label: Space Grotesk, value: display }
+          - { label: Inter, value: sans }
+          - { label: JetBrains Mono, value: monospace }
+          - { label: Lora, value: serif }
     形态:
       - key: borderRadius
         label: 圆角大小
