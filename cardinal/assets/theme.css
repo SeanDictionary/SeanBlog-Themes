@@ -409,17 +409,15 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
 .cf-card-meta a { text-decoration: none; }
 .cf-card-meta a:hover { color: var(--color-text-secondary); }
 
-/* 双列卡片模式 - 背景图样式 */
-[data-list="cards"][data-card-columns="2"] .cf-card { position: relative; padding: 0; background-size: cover; background-position: center; background-repeat: no-repeat; }
-[data-list="cards"][data-card-columns="2"] .cf-card-image-wrapper { position: relative; height: 50%; overflow: hidden; border-radius: var(--cf-radius) var(--cf-radius) 0 0; }
-[data-list="cards"][data-card-columns="2"] .cf-card-image-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-[data-list="cards"][data-card-columns="2"] .cf-card-image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%); }
-[data-list="cards"][data-card-columns="2"] .cf-card-title-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem 1.25rem; margin: 0; font-size: 1.1rem; }
-[data-list="cards"][data-card-columns="2"] .cf-card-title-overlay a { color: #fff; text-decoration: none; }
-[data-list="cards"][data-card-columns="2"][data-title-color="dark"] .cf-card-title-overlay a { color: #1a1a1a; }
-[data-list="cards"][data-card-columns="2"][data-title-color="light"] .cf-card-title-overlay a { color: #fff; }
-[data-list="cards"][data-card-columns="2"][data-title-color="auto"] .cf-card-title-overlay a { color: #fff; }
-[data-list="cards"][data-card-columns="2"] .cf-card-content { padding: 1.25rem; }
+/* 横幅头图样式 */
+[data-card-image-style="banner"] .cf-card-banner { position: relative; height: 200px; margin: -1.25rem -1.25rem 0.75rem; border-radius: var(--cf-radius) var(--cf-radius) 0 0; overflow: hidden; }
+[data-card-image-style="banner"] .cf-card-banner img { width: 100%; height: 100%; object-fit: cover; }
+[data-card-image-style="banner"] .cf-card-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%); }
+[data-card-image-style="banner"] .cf-card-title-banner { position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem 1.25rem; margin: 0; font-size: 1.1rem; }
+[data-card-image-style="banner"] .cf-card-title-banner a { color: #fff; text-decoration: none; }
+[data-card-image-style="banner"][data-title-color="dark"] .cf-card-title-banner a { color: #1a1a1a; }
+[data-card-image-style="banner"][data-title-color="light"] .cf-card-title-banner a { color: #fff; }
+[data-card-image-style="banner"][data-title-color="auto"] .cf-card-title-banner a { color: #fff; }
 .cf-empty { text-align: center; padding: 4rem 0; color: var(--color-text-tertiary); }
 /* list 模式：标题行1 → 封面 float left + 摘要环绕 行2 → meta clear 行3 */
 [data-list="list"] .cf-card { display: block; }
