@@ -5,7 +5,7 @@
 </header>
 <section class="cf-list">
   {{#if posts.length}}
-  <div class="cf-posts" data-card-columns="{{#if theme.config.cardColumns}}{{theme.config.cardColumns}}{{else}}2{{/if}}" data-card-image-style="{{#if theme.config.cardImageStyle}}{{theme.config.cardImageStyle}}{{else}}default{{/if}}" data-title-color="{{#if theme.config.cardTitleColor}}{{theme.config.cardTitleColor}}{{else}}auto{{/if}}">
+  <div class="cf-posts" data-card-columns="{{#if theme.config.cardColumns}}{{theme.config.cardColumns}}{{else}}2{{/if}}" data-card-image-style="{{#if theme.config.cardImageStyle}}{{theme.config.cardImageStyle}}{{else}}default{{/if}}" data-title-color="{{#if theme.config.cardTitleColor}}{{theme.config.cardTitleColor}}{{else}}follow{{/if}}">
     {{#each posts}}{{> post-card}}{{/each}}
   </div>
   {{else}}

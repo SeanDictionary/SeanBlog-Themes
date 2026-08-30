@@ -6,6 +6,7 @@
  * - 返回顶部按钮显隐
  * - 评论跳转
  * - 评论回复 UX
+ * - 代码块工具条：复制 / 自动换行切换
  * 平台行为（评论提交 / 搜索）由 /enhance.js 处理。
  */
 ;(function () {
@@ -125,6 +126,64 @@
     if (cancel) cancel.addEventListener('click', function () {
       if (parentInput) parentInput.value = ''
       if (banner) banner.setAttribute('hidden', '')
+    })
+  })
+
+  // 代码块工具条：复制 / 自动换行
+  ready(function () {
+    var pres = document.querySelectorAll('.cf-post-content pre')
+    if (!pres.length) return
+    function copyText(text, done) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () { done(true) }, function () { done(false) })
+        return
+      }
+      // 非安全上下文降级：隐藏 textarea + execCommand
+      var ta = document.createElement('textarea')
+      ta.value = text
+      ta.style.position = 'fixed'
+      ta.style.opacity = '0'
+      document.body.appendChild(ta)
+      ta.select()
+      var ok = false
+      try { ok = document.execCommand('copy') } catch (e) {}
+      document.body.removeChild(ta)
+      done(ok)
+    }
+    Array.prototype.forEach.call(pres, function (pre) {
+      if (pre.parentElement && pre.parentElement.classList.contains('cf-code-shell')) return // 防重复注入
+      var shell = document.createElement('div')
+      shell.className = 'cf-code-shell'
+      pre.parentNode.insertBefore(shell, pre)
+      shell.appendChild(pre)
+      var bar = document.createElement('div')
+      bar.className = 'cf-code-bar'
+      var copyBtn = document.createElement('button')
+      copyBtn.type = 'button'
+      copyBtn.className = 'cf-code-btn'
+      copyBtn.title = '复制代码'
+      copyBtn.setAttribute('aria-label', '复制代码')
+      copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i>'
+      copyBtn.addEventListener('click', function () {
+        // 行号是 ::before 伪元素，不会进入 innerText；innerText 在 Windows 上返回 CRLF，统一规范化为 LF
+        copyText(pre.innerText.replace(/\r\n/g, '\n').replace(/\n$/, ''), function (ok) {
+          copyBtn.innerHTML = ok ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-solid fa-xmark"></i>'
+          setTimeout(function () { copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i>' }, 1500)
+        })
+      })
+      var wrapBtn = document.createElement('button')
+      wrapBtn.type = 'button'
+      wrapBtn.className = 'cf-code-btn'
+      wrapBtn.title = '切换自动换行'
+      wrapBtn.setAttribute('aria-label', '切换自动换行')
+      wrapBtn.innerHTML = '<i class="fa-solid fa-text-width"></i>'
+      wrapBtn.addEventListener('click', function () {
+        var on = pre.classList.toggle('cf-code-wrapped')
+        wrapBtn.classList.toggle('cf-active', on)
+      })
+      bar.appendChild(copyBtn)
+      bar.appendChild(wrapBtn)
+      shell.appendChild(bar)
     })
   })
 })()

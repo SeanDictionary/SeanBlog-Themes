@@ -1,16 +1,16 @@
 {{#eq theme.config.showHeroSection true}}
 <section class="cf-hero">
-  {{#eq theme.config.heroStyle "minimal"}}
-  <h1>{{site.title}}</h1>
-  {{#if site.description}}<p>{{site.description}}</p>{{/if}}
-  {{/eq}}
-  {{#eq theme.config.heroStyle "banner"}}
-  <h1>{{site.title}}</h1>
-  {{#if site.description}}<p>{{site.description}}</p>{{/if}}
-  {{/eq}}
-  {{#eq theme.config.heroStyle "fullscreen"}}
-  <h1>{{site.title}}</h1>
-  {{#if site.description}}<p>{{site.description}}</p>{{/if}}
-  {{/eq}}
+  <div class="cf-hero-frame">
+    <div class="cf-hero-panel" data-hero-bg="{{#if theme.config.heroBgImage}}true{{else}}false{{/if}}" data-hero-fallback="{{#if theme.config.heroBgFallback}}{{theme.config.heroBgFallback}}{{else}}subtle{{/if}}">
+      {{#if theme.config.heroBgImage}}
+      <div class="cf-hero-bg" style="background-image:url('{{theme.config.heroBgImage}}')"></div>
+      <div class="cf-hero-overlay"></div>
+      {{/if}}
+      <div class="cf-hero-inner">
+        <h1>{{site.title}}</h1>
+        {{#if site.description}}<p>{{site.description}}</p>{{/if}}
+      </div>
+    </div>
+  </div>
 </section>
 {{/eq}}

@@ -175,26 +175,50 @@ settingsSchema:
       - key: cardTitleColor
         label: 横幅标题颜色
         type: select
-        default: auto
+        default: follow
         if: "cardImageStyle === 'banner'"
         options:
           - { label: 深色, value: dark }
           - { label: 浅色, value: light }
-          - { label: 自动, value: auto }
+          - { label: 跟随深浅主题, value: follow }
     首页 Hero:
       - key: showHeroSection
         label: 首页 Hero 区
         type: boolean
         default: true
-      - key: heroStyle
-        label: Hero 区样式
+      - key: heroWidth
+        label: Hero 区宽度
         type: select
-        default: minimal
+        default: medium
         if: "showHeroSection === true"
         options:
-          - { label: 居中极简, value: minimal }
-          - { label: 渐变横幅, value: banner }
-          - { label: 全屏封面, value: fullscreen }
+          - { label: 窄（文章列表宽度）, value: narrow }
+          - { label: 中（内容宽度）, value: medium }
+          - { label: 宽（窗口宽度）, value: wide }
+      - key: heroBgImage
+        label: 背景图
+        type: text
+        default: ""
+        if: "showHeroSection === true"
+        description: 支持本地链接或外部链接，留空则不显示
+      - key: heroHeight
+        label: Hero 区高度
+        type: select
+        default: auto
+        if: "showHeroSection === true && heroWidth === 'wide'"
+        options:
+          - { label: 自动, value: auto }
+          - { label: 半屏, value: half }
+          - { label: 全屏, value: fullscreen }
+      - key: heroBgFallback
+        label: 无背景图时底色
+        type: select
+        default: subtle
+        if: "showHeroSection === true"
+        options:
+          - { label: 无底, value: none }
+          - { label: 浅色底, value: subtle }
+          - { label: 主题色渐变, value: gradient }
       - key: showPinned
         label: 置顶文章区
         type: boolean
@@ -216,10 +240,16 @@ settingsSchema:
         default: true
         if: "showTopBar === true"
       - key: accentColor
-        label: 强调色
+        label: 主题色
         type: color
         default: "#cf829e"
         cssVariable: --color-accent
+        description: 全站色彩体系的唯一输入，hover/浅底/渐变等均由此派生
+      - key: accentImmersion
+        label: 气氛色沉浸
+        type: boolean
+        default: false
+        description: 背景与边框染上主题色调（Material You 风格）
     字体:
       - key: fontFamily
         label: 正文字体
