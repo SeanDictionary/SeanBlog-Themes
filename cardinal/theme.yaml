@@ -227,7 +227,7 @@ settingsSchema:
   视觉风格:
     色彩:
       - key: colorMode
-        label: 色彩模式
+        label: 主题
         type: select
         default: dark
         options:
@@ -235,10 +235,18 @@ settingsSchema:
           - { label: 浅色, value: light }
           - { label: 跟随系统, value: auto }
       - key: showThemeToggle
-        label: 前台色彩切换按钮
+        label: 主题切换按钮
         type: boolean
         default: true
         if: "showTopBar === true"
+      - key: themeTogglePosition
+        label: 显示位置
+        type: select
+        default: topbar
+        if: "showThemeToggle === true"
+        options:
+          - { label: 顶栏, value: topbar }
+          - { label: 角标, value: corner }
       - key: accentColor
         label: 主题色
         type: color
@@ -293,11 +301,11 @@ settingsSchema:
         default: true
         if: "showTopBar === true"
       - key: articleHeadingStyle
-        label: 文章标题装饰
+        label: 正文二级标题样式
         type: select
         default: default
         options:
-          - { label: 默认下划线, value: default }
+          - { label: 默认样式, value: default }
           - { label: 彩色下划线, value: underline }
           - { label: 左侧竖条, value: bar-left }
     代码块:

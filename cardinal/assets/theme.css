@@ -212,8 +212,8 @@ h1,h2,h3,h4 { font-family: var(--cf-heading-font); }
 
 .cf-post-content { font-size: 1rem; line-height: 1.85; color: var(--color-text); }
 .cf-post-content h2 { font-size: 1.4rem; margin: 2rem 0 0.75rem; }
-[data-heading="underline"] .cf-post-content h2 { border-bottom: 2px solid var(--color-accent); padding-bottom: 0.3rem; }
-[data-heading="bar-left"] .cf-post-content h2 { border-left: 4px solid var(--color-accent); padding-left: 0.75rem; }
+[data-article-heading="underline"] .cf-post-content h2 { border-bottom: 2px solid var(--color-accent); padding-bottom: 0.3rem; }
+[data-article-heading="bar-left"] .cf-post-content h2 { border-left: 4px solid var(--color-accent); padding-left: 0.75rem; }
 .cf-post-content h3 { font-size: 1.15rem; margin: 1.75rem 0 0.5rem; }
 .cf-post-content p { margin: 1rem 0; }
 .cf-post-content a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 2px; }
@@ -305,7 +305,11 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
 .cf-back-to-top { position: fixed; right: 1.5rem; bottom: 1.5rem; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--color-bg-secondary); border: 1px solid var(--color-border); color: var(--color-text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--cf-shadow); opacity: 0; pointer-events: none; transition: opacity .2s, color .15s; z-index: 30; }
 .cf-back-to-top.cf-visible { opacity: 1; pointer-events: auto; }
 .cf-back-to-top:hover { color: var(--color-accent); }
-.cf-comment-jump { position: fixed; right: 1.5rem; bottom: 4.5rem; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--color-accent); border: none; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--cf-shadow); z-index: 30; }
+/* 主题切换角标：样式与返回顶部一致，位于返回顶部与评论跳转之间 */
+.cf-theme-toggle { position: fixed; right: 1.5rem; bottom: 3rem; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--color-bg-secondary); border: 1px solid var(--color-border); color: var(--color-text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--cf-shadow); transition: color .15s; z-index: 30; }
+.cf-theme-toggle:hover { color: var(--color-accent); }
+/* 评论跳转默认位于最下方；动态脚本会按当前存在的按钮自动堆叠 */
+.cf-comment-jump { position: fixed; right: 1.5rem; bottom: 1.5rem; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--color-accent); border: none; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--cf-shadow); z-index: 30; }
 .cf-comment-jump:hover { background: var(--color-accent-hover); }
 
 /* === 响应式 === */

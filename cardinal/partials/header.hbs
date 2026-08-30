@@ -9,7 +9,7 @@
     </div>
     <div class="cf-header-actions">
       {{#eq theme.config.showSearch true}}{{#eq theme.config.searchPosition "right-side"}}<button type="button" data-sb-search class="btn btn-sm btn-outline-secondary cf-icon-btn" aria-label="搜索"><i class="fa-solid fa-magnifying-glass"></i></button>{{/eq}}{{/eq}}
-      {{#eq theme.config.showThemeToggle true}}<button type="button" data-sb-theme-toggle class="btn btn-sm btn-outline-secondary cf-icon-btn" aria-label="切换深浅色"><i class="fa-solid fa-circle-half-stroke"></i></button>{{/eq}}
+      {{#eq theme.config.showThemeToggle true}}{{#ne theme.config.themeTogglePosition "corner"}}<button type="button" data-sb-theme-toggle class="btn btn-sm btn-outline-secondary cf-icon-btn" aria-label="切换深浅色"><i class="fa-solid fa-circle-half-stroke"></i></button>{{/ne}}{{/eq}}
     </div>
   </div>
 </header>
