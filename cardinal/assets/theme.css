@@ -292,6 +292,10 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
 .cf-footer-inner { max-width: calc(var(--cf-content-width) + var(--cf-sidebar-width) + var(--cf-gap)); margin: 0 auto; padding: 2rem var(--content-padding); display: flex; justify-content: space-between; align-items: center; color: var(--color-text-tertiary); font-size: 0.78rem; }
 .cf-footer a { color: var(--color-text-tertiary); text-decoration: none; }
 .cf-footer a:hover { color: var(--color-text-secondary); }
+/* 自定义页脚容器：占满可用宽度，内部走正常块流；只继承字体颜色/大小，不继承 flex 排版；
+   直接子元素 margin 清零，间距由用户内联 style 自行控制 */
+.cf-footer-text { flex: 1 1 auto; min-width: 0; }
+.cf-footer-text > * { margin: 0; }
 
 /* === 搜索弹窗（cf-* 样式覆盖 sb-* 结构） === */
 .sb-search-overlay { background: color-mix(in srgb, #000 55%, transparent); }
