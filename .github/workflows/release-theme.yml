@@ -1,0 +1,110 @@
+# 主题构建与发版（单一 workflow）
+#
+# 模型：每次 push 到 main → 打包所有主题 → 重建固定 tag `latest` 的滚动 Release，
+# 所有主题的 zip 都在该 Release 中，下载页始终拿到全部主题当前版本，不累积、不刷屏。
+#
+# - 触发：push 到 main（+ 手动 workflow_dispatch）
+# - 打包：仓库根下每个含 theme.yaml 的子目录 → dist/<slug>.zip（根目录=主题内容）
+# - 发版：删除旧 latest release+tag（若有，避免残留旧 zip）→ 重建 latest release，
+#   挂全部 zip，body 为各主题元数据表（名称/版本/文件/说明）+ 安装指引
+#
+# 设计取舍：滚动模型不保留「每版本独立 release + 自动变更日志」。
+# 如需版本历史与 changelog，应改为按 version bump 发独立 release（见 git 历史）。
+
+name: Build and Release Themes
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Package all themes and publish rolling release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Package themes and build release notes
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+
+          {
+            echo "# 主题合集（最新构建）"
+            echo
+            echo "每次 push 到 main 自动重建，始终包含所有主题当前版本的 zip。"
+            echo
+            echo "| 主题 | 版本 | 文件 | 说明 |"
+            echo "|---|---|---|---|"
+          } > release_body.md
+
+          found=0
+          for d in */; do
+            d="${d%/}"
+            manifest="$d/theme.yaml"
+            [ -f "$manifest" ] || continue
+            found=1
+
+            # 从清单顶层抽取标量字段（无需 YAML 解析器）
+            get() {
+              grep -m1 "^$1:" "$manifest" \
+                | sed "s/^$1:[[:space:]]*//; s/[[:space:]]*\$//; s/^[\"']//; s/[\"']\$//"
+            }
+            slug=$(get slug)
+            version=$(get version)
+            name=$(get name)
+            description=$(get description)
+
+            [ -n "$slug" ] && [ -n "$version" ] || { echo "::warning::Skip $d: missing slug/version"; continue; }
+
+            # zip 根目录 = 主题内容（与 theme-development.md §2.1 约定一致）
+            ( cd "$d" && zip -r "../dist/${slug}.zip" . \
+                -x '*.DS_Store' -x 'node_modules/*' -x '*.zip' -x '.git/*' \
+                >/dev/null )
+
+            # 表格里的 | 转义，避免破坏 markdown 表格
+            desc_safe=${description//|/\/}
+            echo "| ${name} | ${version} | \`${slug}.zip\` | ${desc_safe} |" >> release_body.md
+          done
+
+          if [ "$found" -eq 0 ]; then
+            echo "::error::No theme directories (containing theme.yaml) found."
+            exit 1
+          fi
+
+          {
+            echo
+            echo "## 安装"
+            echo
+            echo "下载对应主题的 zip，到 [SeanBlog-Frame](https://github.com/SeanDictionary/SeanBlog-Frame) 后台 \`/admin/themes\` 上传 → 启用即可。详见[主题开发指引](https://github.com/SeanDictionary/SeanBlog-Frame/blob/main/docs/theme-development.md)。"
+          } >> release_body.md
+
+          echo "=== release_body.md ==="
+          cat release_body.md
+          echo "=== packaged zips ==="
+          ls -1 dist/
+
+      - name: Publish rolling release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          # 删除旧 latest release + tag（若存在），避免残留旧 zip / 已删主题的旧文件
+          gh release delete latest --yes --cleanup-tag --repo "$GITHUB_REPOSITORY" 2>/dev/null || true
+          # 重建 latest release，挂全部 zip
+          gh release create latest dist/*.zip \
+            --target "$GITHUB_SHA" \
+            --title "Themes (latest)" \
+            --notes-file release_body.md \
+            --latest \
+            --repo "$GITHUB_REPOSITORY"

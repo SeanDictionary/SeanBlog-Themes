@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="{{asset "assets/theme.css"}}">
   {{{theme_css}}}
   {{{callout_css}}}
+  {{{katex_css_link}}}
 </head>
 <body class="cf-body cf-page-{{page}}" data-font="{{theme.config.fontFamily}}" data-heading="{{theme.config.headingFontFamily}}" data-article-heading="{{#if theme.config.articleHeadingStyle}}{{theme.config.articleHeadingStyle}}{{else}}default{{/if}}" data-radius="{{theme.config.borderRadius}}" data-shadow="{{theme.config.shadowStyle}}" data-width="{{theme.config.contentWidth}}" data-list="{{theme.config.articleListStyle}}" data-sep="{{theme.config.listSeparator}}" data-accent-immersion="{{#eq theme.config.accentImmersion true}}true{{/eq}}" data-toggle-position="{{#if theme.config.themeTogglePosition}}{{theme.config.themeTogglePosition}}{{else}}topbar{{/if}}" data-hero-width="{{#if theme.config.heroWidth}}{{theme.config.heroWidth}}{{else}}medium{{/if}}" data-hero-height="{{#if theme.config.heroHeight}}{{theme.config.heroHeight}}{{else}}auto{{/if}}" data-sidebar="{{theme.config.sidebarPosition}}" data-sticky="{{theme.config.sidebarSticky}}" data-header="{{theme.config.headerBehavior}}" data-blur="{{theme.config.headerBlur}}" data-show-line-numbers="{{theme.config.showCodeLineNumbers}}" data-code-theme="{{theme.config.codeBlockTheme}}" data-nav-align="{{theme.config.navAlignment}}" data-toc-only="{{#eq page "post"}}{{#eq theme.config.showPostToc true}}true{{/eq}}{{/eq}}">
   {{#eq theme.config.showTopBar true}}{{> header}}{{/eq}}
