@@ -2,10 +2,9 @@
   {{#each theme.config.sidebarContent}}
     {{#eq this "profile"}}
     <div class="cf-widget cf-widget-profile">
-      {{#if ../theme.config.profileAvatar}}<img src="{{../theme.config.profileAvatar}}" alt="{{../site.title}}" class="cf-profile-avatar" style="border-radius:{{../theme.config.profileAvatarRadius}}%">{{/if}}
-      <p class="cf-profile-name">{{../site.title}}</p>
+      {{#if ../theme.config.profileAvatar}}<img src="{{../theme.config.profileAvatar}}" alt="{{#if ../theme.config.profileName}}{{../theme.config.profileName}}{{else}}{{../site.title}}{{/if}}" class="cf-profile-avatar" style="border-radius:{{../theme.config.profileAvatarRadius}}%">{{/if}}
+      {{#if ../theme.config.profileName}}<p class="cf-profile-name">{{../theme.config.profileName}}</p>{{/if}}
       {{#if ../theme.config.profileSignature}}<p class="cf-profile-signature">{{../theme.config.profileSignature}}</p>{{/if}}
-      {{#if ../site.description}}<p class="cf-profile-desc">{{../site.description}}</p>{{/if}}
       {{#if ../theme.config.profileCustomHtml}}{{{../theme.config.profileCustomHtml}}}{{/if}}
     </div>
     {{/eq}}

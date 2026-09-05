@@ -1,6 +1,6 @@
 slug: cardinal
 name: Cardinal
-version: 3.5.0
+version: 3.6.0
 author:
   name: SeanBlog Frame
 description: 高自由度可配置主题，Aurora/Lazzaro 风格。侧边栏、列表样式、Hero、字体、色彩模式、圆角、阴影、毛玻璃、代码块等全量自定义。
@@ -109,6 +109,12 @@ settingsSchema:
         step: 1
         if: "'profile' in sidebarContent"
         description: 0=方形，50=圆形
+      - key: profileName
+        label: 个人简介名称
+        type: text
+        default: ""
+        if: "'profile' in sidebarContent"
+        description: 留空则不显示名称（不再自动使用站点名称）
       - key: profileSignature
         label: 个人简介签名
         type: text

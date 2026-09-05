@@ -20,7 +20,7 @@
 | 子组 | 设置项 |
 |---|---|
 | 顶栏 | showTopBar / showSiteName / showSearch / searchPosition / navAlignment / navItems / headerBehavior |
-| 侧边栏 | sidebarPosition / sidebarSticky / sidebarContent / profileAvatar / profileAvatarRadius / profileSignature / profileCustomHtml / sidebarTagsLimit / sidebarCategoriesLimit |
+| 侧边栏 | sidebarPosition / sidebarSticky / sidebarContent / profileAvatar / profileAvatarRadius / profileName / profileSignature / profileCustomHtml / sidebarTagsLimit / sidebarCategoriesLimit |
 | 内容区 | contentWidth / articleListStyle / listSeparator / cardColumns / cardImageStyle / cardTitleColor |
 | 首页 Hero | showHeroSection / heroWidth / heroBgImage / heroHeight / heroBgFallback / showPinned |
 

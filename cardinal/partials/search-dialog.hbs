@@ -1,10 +1,25 @@
 <div class="sb-search-overlay" data-sb-search-dialog hidden>
-  <div class="sb-search-dialog">
-    <input type="search" data-sb-search-input placeholder="搜索文章…" autocomplete="off">
-    <ul class="sb-search-results" data-sb-search-results></ul>
-    <template data-sb-search-result-template>
-      <li><a data-sb-result-link><span data-sb-result-title></span></a></li>
-    </template>
-    <li class="sb-search-empty" data-sb-search-empty hidden>无结果</li>
+  <div class="sb-search-dialog" role="dialog" aria-modal="true" aria-label="搜索文章">
+    <div class="sb-search-head">
+      <i class="fa-solid fa-magnifying-glass sb-search-icon" aria-hidden="true"></i>
+      <input type="search" data-sb-search-input placeholder="例如：Next.js 部署 或 Next.js+SEO" autocomplete="off">
+      <button type="button" class="sb-search-esc" data-sb-search-close aria-label="关闭搜索">ESC</button>
+    </div>
+    <div class="sb-search-body">
+      <p class="sb-search-hint" data-sb-search-hint>输入关键词，支持用空格或 + 分隔多个关键词。</p>
+      <ul class="sb-search-results" data-sb-search-results hidden></ul>
+      <template data-sb-search-result-template>
+        <li><a data-sb-result-link class="sb-search-result">
+          <p class="sb-result-title" data-sb-result-title></p>
+          <p class="sb-result-excerpt" data-sb-result-excerpt></p>
+          <p class="sb-result-meta" data-sb-result-meta></p>
+        </a></li>
+      </template>
+      <p class="sb-search-empty" data-sb-search-empty hidden>没有找到相关文章。</p>
+    </div>
+    <footer class="sb-search-foot">
+      <span class="sb-search-foot-hint">输入时实时搜索</span>
+      <a class="sb-search-full" data-sb-search-full href="/search">查看完整搜索结果 <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+    </footer>
   </div>
 </div>

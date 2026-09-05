@@ -297,13 +297,29 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
 .cf-footer-text { flex: 1 1 auto; min-width: 0; }
 .cf-footer-text > * { margin: 0; }
 
-/* === 搜索弹窗（cf-* 样式覆盖 sb-* 结构） === */
-.sb-search-overlay { background: color-mix(in srgb, #000 55%, transparent); }
-.sb-search-dialog { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--cf-radius-lg); box-shadow: var(--cf-shadow); }
-.sb-search-dialog input { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--cf-radius-sm); color: var(--color-text); font-family: var(--cf-font); }
-.sb-search-dialog input:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-subtle); }
-.sb-search-results li a { color: var(--color-text); border-radius: var(--cf-radius-sm); }
-.sb-search-results li a:hover { background: var(--color-bg-secondary); }
+/* === 搜索弹窗（参照早期 Frame 项目的搜索样式：全屏遮罩 + 居中对话框 + 头部输入/尾部链接） === */
+.sb-search-overlay { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 1rem; background: color-mix(in srgb, #000 55%, transparent); backdrop-filter: blur(2px); }
+.sb-search-overlay[hidden] { display: none; }
+.sb-search-dialog { width: 100%; max-width: 42rem; max-height: 80vh; display: flex; flex-direction: column; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--cf-radius-lg); box-shadow: var(--cf-shadow); overflow: hidden; }
+.sb-search-head { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--color-border); }
+.sb-search-icon { color: var(--color-text-tertiary); font-size: 0.95rem; }
+.sb-search-dialog input { flex: 1 1 auto; min-width: 0; background: transparent; border: none; outline: none; color: var(--color-text); font-family: var(--cf-font); font-size: 1rem; }
+.sb-search-dialog input::placeholder { color: var(--color-text-tertiary); }
+.sb-search-esc { flex: 0 0 auto; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--cf-radius-sm); color: var(--color-text-tertiary); font-size: 0.72rem; padding: 0.15rem 0.5rem; cursor: pointer; transition: color .15s, background .15s; }
+.sb-search-esc:hover { color: var(--color-text); background: var(--color-bg-tertiary); }
+.sb-search-body { flex: 1 1 auto; overflow-y: auto; padding: 0.5rem; }
+.sb-search-hint { margin: 0; padding: 1.5rem 1rem; text-align: center; color: var(--color-text-tertiary); font-size: 0.85rem; }
+.sb-search-results { list-style: none; margin: 0; padding: 0; }
+.sb-search-results li a { display: block; padding: 0.6rem 0.75rem; border-radius: var(--cf-radius-sm); color: var(--color-text); text-decoration: none; transition: background .12s; }
+.sb-search-results li a:hover, .sb-search-results li a:focus-visible { background: var(--color-bg-secondary); }
+.sb-result-title { margin: 0; font-weight: 600; font-size: 0.92rem; }
+.sb-result-excerpt { margin: 0.25rem 0 0; font-size: 0.8rem; line-height: 1.5; color: var(--color-text-secondary); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.sb-result-meta { margin: 0.35rem 0 0; font-size: 0.72rem; color: var(--color-text-tertiary); }
+.sb-search-empty { margin: 0; padding: 1.5rem 1rem; text-align: center; color: var(--color-text-tertiary); font-size: 0.85rem; }
+.sb-search-foot { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1.25rem; border-top: 1px solid var(--color-border); font-size: 0.72rem; color: var(--color-text-tertiary); }
+.sb-search-full { color: var(--color-text-tertiary); text-decoration: none; transition: color .15s; }
+.sb-search-full:hover { color: var(--color-accent); }
+.sb-mark { background: color-mix(in srgb, var(--color-accent) 22%, transparent); color: var(--color-text); border-radius: 2px; padding: 0 1px; }
 
 /* === 浮动按钮 === */
 .cf-back-to-top { position: fixed; right: 1.5rem; bottom: 1.5rem; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--color-bg-secondary); border: 1px solid var(--color-border); color: var(--color-text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--cf-shadow); opacity: 0; pointer-events: none; transition: opacity .2s, color .15s; z-index: 30; }
@@ -333,6 +349,10 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
 
 /* === 代码块行号显示开关（框架已改为始终输出 .line，主题用 CSS counter 控制显隐）=== */
 .cf-post-content pre { counter-reset: codeline; position: relative; }
+/* Shiki 在相邻 .line 之间输出 \n 文本节点；若 .line 设 display:block 且 pre 为 white-space:pre，
+   这些 \n 会被渲染成额外空行。把 code 设为 flex column：空白文本节点不再生成
+   匿名 flex 项，行间距恢复为单行高，同时不影响 white-space（含自动换行开关）与行号定位 */
+.cf-post-content pre code { display: flex; flex-direction: column; }
 .cf-post-content pre .line { display: block; }
 [data-show-line-numbers="true"] .cf-post-content pre {
   padding-left: 3.5rem;
@@ -494,7 +514,7 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
 
 /* === 顶栏：导航对齐 / 图标按钮 / 动作区 === */
 .cf-header-left { display: flex; align-items: center; gap: 1.5rem; flex: 1 1 auto; min-width: 0; }
-.cf-header-actions { display: flex; align-items: center; gap: 0.5rem; flex: 0 0 auto; }
+.cf-header-actions { display: flex; align-items: center; gap: 0.5rem; flex: 0 0 auto; margin-left: 0.75rem; }
 .cf-icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; border: none; background: transparent; color: var(--color-text-secondary); cursor: pointer; border-radius: var(--cf-radius-sm); transition: color .15s, background .15s; font-size: 0.95rem; }
 .cf-icon-btn:hover { color: var(--color-text); background: var(--color-bg-secondary); }
 [data-nav-align="left"] .cf-nav { margin-right: auto; }
