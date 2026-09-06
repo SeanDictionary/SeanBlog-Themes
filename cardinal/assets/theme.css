@@ -488,6 +488,14 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
 /* 横幅标题 hover：特异性高于上方固定色规则，否则 hover 无效果 */
 [data-card-image-style="banner"] .cf-card:hover .cf-card-title-banner a { color: var(--color-accent); }
 .cf-empty { text-align: center; padding: 4rem 0; color: var(--color-text-tertiary); }
+/* 404 页：居中展示，复用 .cf-archive-kicker 与 .cf-btn，新增 .cf-btn-ghost 次要按钮 */
+.cf-not-found { text-align: center; padding: 5rem 0; }
+.cf-not-found .cf-archive-kicker { font-size: 0.75rem; margin-bottom: 0.5rem; }
+.cf-not-found-title { font-size: 2.75rem; font-weight: 700; letter-spacing: -0.03em; margin: 0 0 0.75rem; font-family: var(--cf-heading-font); }
+.cf-not-found-desc { color: var(--color-text-secondary); margin: 0 0 2rem; }
+.cf-not-found-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+.cf-btn-ghost { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }
+.cf-btn-ghost:hover { background: var(--color-bg-secondary); }
 /* list 模式：标题行1 → 封面 float left + 摘要环绕 行2 → meta clear 行3 */
 [data-list="list"] .cf-card { display: block; }
 [data-list="list"] .cf-card-cover { float: left; width: 96px; aspect-ratio: 16/9; margin: 0 1rem 0.5rem 0; }

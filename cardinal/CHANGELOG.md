@@ -5,6 +5,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- 新增 `templates/404.hbs` 404 页模板：居中展示 404 状态码、标题、说明与「返回首页 / 返回上一页」按钮，复用 `.cf-archive-kicker` 与 `.cf-btn`，新增 `.cf-btn-ghost` 次要按钮变体与 `.cf-not-found*` 样式。主题未提供 404.hbs 时由平台内置 404 页兜底。
+
 ### Changed
 
 - 移除 `profileName`（个人简介名称）设置项的多余说明文案「留空则不显示名称（不再自动使用站点名称）」；留空即不显示，无需额外提示。`profileSignature`（个人简介签名）本就无说明文案，行为一致。
