@@ -488,8 +488,12 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
 /* 横幅标题 hover：特异性高于上方固定色规则，否则 hover 无效果 */
 [data-card-image-style="banner"] .cf-card:hover .cf-card-title-banner a { color: var(--color-accent); }
 .cf-empty { text-align: center; padding: 4rem 0; color: var(--color-text-tertiary); }
-/* 404 页：居中展示，复用 .cf-archive-kicker 与 .cf-btn，新增 .cf-btn-ghost 次要按钮 */
-.cf-not-found { text-align: center; padding: 5rem 0; }
+/* 404 页：隐藏侧边栏，body 撑满视口的 flex 列，内容垂直居中，页脚贴底（不吊在半空） */
+.cf-body.cf-page-404 { min-height: 100vh; display: flex; flex-direction: column; }
+.cf-body.cf-page-404 .cf-sidebar { display: none; }
+.cf-body.cf-page-404 .cf-layout { flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: var(--cf-content-width); padding-block: 2rem; }
+.cf-body.cf-page-404 .cf-main { max-width: none; display: flex; flex-direction: column; justify-content: center; }
+.cf-not-found { text-align: center; padding: 3rem 0; }
 .cf-not-found .cf-archive-kicker { font-size: 0.75rem; margin-bottom: 0.5rem; }
 .cf-not-found-title { font-size: 2.75rem; font-weight: 700; letter-spacing: -0.03em; margin: 0 0 0.75rem; font-family: var(--cf-heading-font); }
 .cf-not-found-desc { color: var(--color-text-secondary); margin: 0 0 2rem; }
