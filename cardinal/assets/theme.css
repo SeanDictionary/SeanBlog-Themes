@@ -271,7 +271,7 @@ h1,h2,h3,h4 { font-family: var(--cf-heading-font); }
 .cf-field input:focus, .cf-field textarea:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-subtle); }
 .cf-field textarea { resize: vertical; min-height: 5.5rem; }
 .cf-form-actions { display: flex; align-items: center; gap: 1rem; margin-top: 0.5rem; }
-.cf-btn { background: var(--color-accent); color: #fff; border: none; padding: 0.55rem 1.4rem; border-radius: var(--cf-radius-sm); font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: background .15s; }
+.cf-btn { background: var(--color-accent); color: #fff; border: none; padding: 0.55rem 1.4rem; border-radius: var(--cf-radius-sm); font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: background .15s; text-decoration: none; }
 .cf-btn:hover { background: var(--color-accent-hover); }
 .cf-comment-status { font-size: 0.78rem; color: var(--color-text-tertiary); margin: 0; }
 form[data-sb-comment-form][data-state="success"] .cf-comment-status { color: var(--color-success); }

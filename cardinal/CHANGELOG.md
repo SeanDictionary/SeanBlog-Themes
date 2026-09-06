@@ -9,6 +9,7 @@
 
 - 新增 `templates/404.hbs` 404 页模板：居中展示 404 状态码、标题、说明与「返回首页 / 返回上一页」按钮，复用 `.cf-archive-kicker` 与 `.cf-btn`，新增 `.cf-btn-ghost` 次要按钮变体与 `.cf-not-found*` 样式。主题未提供 404.hbs 时由平台内置 404 页兜底。
 - 404 页布局调整：隐藏侧边栏，`.cf-body.cf-page-404` 设为 `min-height:100vh` 的 flex 列，`.cf-layout` 撑满视口且内容垂直居中，页脚自然贴底（不再吊在半空）。仅作用于 404 页，不影响其他页面。
+- `.cf-btn` 补 `text-decoration: none`，修复 404 页「返回首页」作为 `<a>` 时默认带下划线的问题。
 
 ### Changed
 
