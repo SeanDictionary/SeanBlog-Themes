@@ -5,6 +5,8 @@
 
 ## [Unreleased]
 
+## [3.8.0] - 2026-09-06
+
 ### Added
 
 - 新增 `templates/404.hbs` 404 页模板：居中展示 404 状态码、标题、说明与「返回首页 / 返回上一页」按钮，复用 `.cf-archive-kicker` 与 `.cf-btn`，新增 `.cf-btn-ghost` 次要按钮变体与 `.cf-not-found*` 样式。主题未提供 404.hbs 时由平台内置 404 页兜底。
