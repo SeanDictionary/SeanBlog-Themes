@@ -114,7 +114,6 @@ settingsSchema:
         type: text
         default: ""
         if: "'profile' in sidebarContent"
-        description: 留空则不显示名称（不再自动使用站点名称）
       - key: profileSignature
         label: 个人简介签名
         type: text
