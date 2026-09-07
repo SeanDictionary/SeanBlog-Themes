@@ -37,6 +37,15 @@
     layoutFloatingButtons()
   })
 
+  // Bootstrap modal 嵌套在 sticky/fixed 侧栏内时，侧栏会形成层叠上下文，
+  // 把 modal 的 z-index 困在局部，导致 body 级的 .modal-backdrop 反画在 modal 之上，
+  // 关闭按钮 / 点击遮罩关闭失效。将侧栏内 modal 提升至 body 直接子节点以脱离该上下文。
+  ready(function () {
+    document.querySelectorAll('.cf-sidebar .modal').forEach(function (el) {
+      document.body.appendChild(el)
+    })
+  })
+
   // 深浅色切换
   ready(function () {
     document.querySelectorAll('[data-sb-theme-toggle]').forEach(function (el) {

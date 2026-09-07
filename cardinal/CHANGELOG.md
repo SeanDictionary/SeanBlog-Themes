@@ -5,6 +5,10 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- 修复侧边栏「更多」弹窗（标签 / 分类全部列表）无法关闭的问题：当 `sidebarSticky` 为 `sticky`/`fixed` 时，`.cf-sidebar` 的 `position: sticky/fixed` 会创建层叠上下文，把 Bootstrap modal 的 `z-index:1055` 困在侧栏局部，导致 body 级 `.modal-backdrop`（`z-index:1050`）反而画在 modal 之上、遮住关闭按钮与遮罩点击区，关闭按钮 / 点击遮罩关闭均失效（仅 Esc 与 JS 调用 `hide()` 仍可用）。`assets/js/main.js` 在初始化时将 `.cf-sidebar` 内的 modal 提升至 `<body>` 直接子节点，脱离侧栏层叠上下文，关闭按钮与点击遮罩恢复正常。
+
 ## [3.8.0] - 2026-09-06
 
 ### Added
