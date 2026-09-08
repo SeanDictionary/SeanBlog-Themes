@@ -5,6 +5,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- 新增移动端导航菜单：窄屏（≤640px）顶栏 `.cf-nav` 隐藏后，`.cf-header-actions` 出现汉堡按钮（`data-cf-menu-toggle`），点击展开 `.cf-mobile-menu` 抽屉式面板，复用 `theme.config.navItems` 与（`searchPosition` 为 `follow-menu` 时的）搜索入口。点击菜单项 / 外部点击 / Esc / 切回宽屏均自动关闭，`aria-expanded`/`aria-label` 随状态切换。修复此前窄屏无法从顶栏进入「分类」「标签」索引页的问题。
+
 ### Fixed
 
 - 修复侧边栏「更多」弹窗（标签 / 分类全部列表）无法关闭的问题：当 `sidebarSticky` 为 `sticky`/`fixed` 时，`.cf-sidebar` 的 `position: sticky/fixed` 会创建层叠上下文，把 Bootstrap modal 的 `z-index:1055` 困在侧栏局部，导致 body 级 `.modal-backdrop`（`z-index:1050`）反而画在 modal 之上、遮住关闭按钮与遮罩点击区，关闭按钮 / 点击遮罩关闭均失效（仅 Esc 与 JS 调用 `hide()` 仍可用）。`assets/js/main.js` 在初始化时将 `.cf-sidebar` 内的 modal 提升至 `<body>` 直接子节点，脱离侧栏层叠上下文，关闭按钮与点击遮罩恢复正常。

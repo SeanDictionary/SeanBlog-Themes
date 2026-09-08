@@ -348,9 +348,21 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
   .cf-body { font-size: 15px; }
   .cf-post-title { font-size: 1.75rem; }
   .cf-nav a:not(.cf-nav-brand) { display: none; }
+  /* follow-menu 搜索按钮随导航隐藏（位于 .cf-nav 内）；窄屏改用移动菜单或右侧搜索入口 */
+  .cf-nav .cf-icon-btn[data-sb-search] { display: none; }
+  .cf-header-actions .cf-menu-toggle { display: inline-flex; }
   [data-hero-width] .cf-hero-inner { padding: 2rem 1.25rem; }
   .cf-hero h1 { font-size: 2rem; }
 }
+
+/* === 移动端菜单（汉堡按钮展开的抽屉式面板，≤640px 可见）=== */
+.cf-menu-toggle { display: none; }
+.cf-mobile-menu { display: none; }
+.cf-mobile-menu.cf-open { display: flex; flex-direction: column; position: absolute; left: 0; right: 0; top: 100%; z-index: 40; background: var(--color-bg); border-bottom: 1px solid var(--color-border); box-shadow: var(--cf-shadow); padding: 0.375rem 0; }
+.cf-mobile-menu-item { display: flex; align-items: center; gap: 0.625rem; padding: 0.75rem 1.25rem; font-size: 0.95rem; color: var(--color-text-secondary); text-decoration: none; background: none; border: none; width: 100%; text-align: left; cursor: pointer; border-bottom: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent); }
+.cf-mobile-menu-item:last-child { border-bottom: none; }
+.cf-mobile-menu-item:hover { background: var(--color-bg-secondary); color: var(--color-text); }
+@media (min-width: 641px) { .cf-header-actions .cf-menu-toggle { display: none !important; } .cf-mobile-menu.cf-open { display: none; } }
 
 /* === 代码块行号显示开关（框架已改为始终输出 .line，主题用 CSS counter 控制显隐）=== */
 .cf-post-content pre { counter-reset: codeline; position: relative; }

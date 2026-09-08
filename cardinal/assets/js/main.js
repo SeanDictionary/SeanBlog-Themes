@@ -78,6 +78,35 @@
     }, { passive: true })
   })
 
+  // 移动端菜单开关（汉堡按钮）
+  ready(function () {
+    var toggle = document.querySelector('[data-cf-menu-toggle]')
+    var menu = document.querySelector('[data-cf-mobile-menu]')
+    if (!toggle || !menu) return
+    function open() { menu.classList.add('cf-open'); toggle.setAttribute('aria-expanded', 'true'); toggle.setAttribute('aria-label', '关闭菜单') }
+    function close() { menu.classList.remove('cf-open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', '打开菜单') }
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation()
+      if (menu.classList.contains('cf-open')) close(); else open()
+    })
+    // 点击菜单项（含搜索按钮）后自动关闭
+    menu.addEventListener('click', function (e) {
+      if (e.target.closest('a, button')) close()
+    })
+    // 点击外部关闭
+    document.addEventListener('click', function (e) {
+      if (!menu.contains(e.target) && !toggle.contains(e.target)) close()
+    })
+    // ESC 关闭
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close()
+    })
+    // 从窄屏切回宽屏时关闭，避免遗留 cf-open
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 640) close()
+    })
+  })
+
   // TOC 滚动高亮
   ready(function () {
     var toc = document.querySelector('[data-sb-toc]')
