@@ -5,6 +5,10 @@
 
 ## [Unreleased]
 
+（暂无）
+
+## [3.9.0] - 2026-09-09
+
 ### Added
 
 - 新增移动端导航菜单：窄屏（≤640px）顶栏 `.cf-nav` 隐藏后，`.cf-header-actions` 出现汉堡按钮（`data-cf-menu-toggle`），点击展开 `.cf-mobile-menu` 抽屉式面板，复用 `theme.config.navItems` 与（`searchPosition` 为 `follow-menu` 时的）搜索入口。点击菜单项 / 外部点击 / Esc / 切回宽屏均自动关闭，`aria-expanded`/`aria-label` 随状态切换。修复此前窄屏无法从顶栏进入「分类」「标签」索引页的问题。
