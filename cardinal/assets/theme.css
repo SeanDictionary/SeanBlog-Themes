@@ -653,7 +653,7 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
 .friend-link-card {
   margin: 1.5em 0;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--cf-radius-lg);
   background: var(--color-bg-secondary);
   overflow: hidden;
   transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
@@ -689,12 +689,32 @@ form[data-sb-comment-form][data-state="pending"] .cf-comment-status { color: var
 .github-repo-card.gh-card--mini .gh-card__title { font-size: .8125rem; font-weight: 500; }
 .github-repo-card.gh-card--mini .gh-card__stars { font-size: .75rem; }
 
-/* friend-link（多个连续自动排成网格） */
-.friend-link-card { display: inline-block; width: 100%; max-width: 340px; margin: 0 .875rem .875rem 0; vertical-align: top; }
+/* friend-link 网格容器（平台侧将连续 friend-link 包裹在 .friend-link-grid） */
+.friend-link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: .875rem;
+  margin: 1.5em 0;
+  width: 100%;
+}
+/* 网格内的卡片去掉独立 margin，由 grid gap 控制间距 */
+.friend-link-grid .friend-link-card {
+  margin: 0;
+  max-width: none;
+  width: 100%;
+}
+/* friend-link 单卡片（未被网格包裹时）保留原有行为 */
+.friend-link-card { display: block; width: 100%; }
 .friend-link-card .fl-card__link { margin: 0; }
 .fl-card__link { display: flex; align-items: center; gap: .875rem; padding: .875rem 1.1rem; color: var(--color-text); text-decoration: none; }
 .cf-post-content .fl-card__link { text-decoration: none; }
 .fl-card__link * { text-decoration: none; }
+/* 头像：覆盖 .cf-post-content img 的 margin / border-radius，保证有头像与无头像高度一致 */
+.cf-post-content .fl-card__avatar-img {
+  margin: 0;
+  border-radius: 50%;
+  display: block;
+}
 .fl-card__avatar-img, .fl-card__avatar-fallback { width: 2.75rem; height: 2.75rem; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
 .fl-card__avatar-fallback { display: inline-flex; align-items: center; justify-content: center; background: var(--color-accent-subtle); color: var(--color-accent-text); font-weight: 600; font-size: 1.125rem; }
 .fl-card__main { display: flex; flex-direction: column; gap: .2rem; min-width: 0; }
